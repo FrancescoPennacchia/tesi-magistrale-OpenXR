@@ -1,10 +1,9 @@
-/*using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [Serializable]
 public class SocketMessage
@@ -124,4 +123,4 @@ public class Operation : MonoBehaviour
             interactor.socketInteractor.StartManualInteraction(attachedObject.GetComponent<IXRSelectInteractable>());
         }
     }
-}*/
+}
