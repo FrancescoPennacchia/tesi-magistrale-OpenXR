@@ -19,11 +19,23 @@ public class Operation : MonoBehaviour
 
     [SerializeField] private TMP_Text canvasText;
 
+    [SerializeField] private GameObject arrow;
+
+    private GameObject currentArrow;
+
     private int currentIndex = 0;
 
-    void Start()
+    /*void Start()
     {
         UpdateMessage();
+        AddArrow(currentIndex);
+        EnableCurrentGrabInteractable();
+    }*/
+
+    public void NewStart()
+    {
+        UpdateMessage();
+        AddArrow(currentIndex);
         EnableCurrentGrabInteractable();
     }
 
@@ -69,10 +81,14 @@ public class Operation : MonoBehaviour
                         interactor.isLocked = true;
                         AttachObject(interactor);
 
+                        // Rimuovi la freccia quando l'oggetto viene afferrato
+                        RemoveArrow();
+
                         currentIndex++;
                         if (currentIndex < socketMessages.Count)
                         {
                             UpdateMessage();
+                            AddArrow(currentIndex);
                             EnableCurrentGrabInteractable();
                         }
                         else
@@ -119,11 +135,40 @@ public class Operation : MonoBehaviour
             if (connectedBody != null)
             {
                 fixedJoint.connectedBody = connectedBody;
+                if (currentArrow != null)
+                {
+                    Destroy(currentArrow);
+                }
             }
             else
             {
                 Debug.LogError("Il GameObject collegato non ha un Rigidbody!");
             }
+        }
+    }
+
+    private void AddArrow(int index)
+    {
+        if (index < 0 || index >= socketMessages.Count)
+        {
+            Debug.LogError("Indice non valido per socketMessages.");
+            return;
+        }
+
+        var currentObject = socketMessages[index].attachedGameObject;
+        if (arrow != null && currentArrow == null && currentObject != null)
+        {
+            currentArrow = Instantiate(arrow, currentObject.transform.position + Vector3.up * 0.5f, arrow.transform.rotation);
+            currentArrow.transform.SetParent(currentObject.transform);
+        }
+    }
+
+    private void RemoveArrow()
+    {
+        if (currentArrow != null)
+        {
+            Destroy(currentArrow);
+            currentArrow = null;
         }
     }
 }
