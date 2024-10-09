@@ -19,8 +19,14 @@ public class Operation : MonoBehaviour
     [SerializeField] private TMP_Text canvasText;
     [SerializeField] private GameObject arrow;
 
+    // Variabili relative alla freccia
     private GameObject currentArrow;
+    private Vector3 initialPosition;
+    private float oscillationSpeed = 2f; // Velocità dell'oscillazione
+    private float oscillationAmplitude = 1f; // Ampiezza dell'oscillazione (in unità di posizione)
+
     private int currentIndex = 0;
+
 
     public void NewStart()
     {
@@ -194,6 +200,7 @@ public class Operation : MonoBehaviour
         {
             currentArrow = Instantiate(arrow, currentObject.transform.position + Vector3.up * 0.5f, arrow.transform.rotation);
             currentArrow.transform.SetParent(currentObject.transform);
+            initialPosition = currentArrow.transform.localPosition;
         }
     }
 
@@ -208,9 +215,13 @@ public class Operation : MonoBehaviour
 
     private void Update()
     {
-        if(currentArrow != null)
+        if (currentArrow != null)
         {
-            currentArrow.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+            // Calcola lo spostamento laterale utilizzando una funzione sinusoidale
+            float offset = Mathf.Sin(Time.time * oscillationSpeed) * oscillationAmplitude;
+
+            // Aggiorna la posizione locale della freccia
+            currentArrow.transform.localPosition = initialPosition + new Vector3(offset, 0, 0);
         }
     }
 }
