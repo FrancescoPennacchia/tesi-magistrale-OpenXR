@@ -16,21 +16,11 @@ public class SocketMessage
 public class Operation : MonoBehaviour
 {
     [SerializeField] private List<SocketMessage> socketMessages;
-
     [SerializeField] private TMP_Text canvasText;
-
     [SerializeField] private GameObject arrow;
 
     private GameObject currentArrow;
-
     private int currentIndex = 0;
-
-    /*void Start()
-    {
-        UpdateMessage();
-        AddArrow(currentIndex);
-        EnableCurrentGrabInteractable();
-    }*/
 
     public void NewStart()
     {
@@ -45,6 +35,18 @@ public class Operation : MonoBehaviour
         {
             interactor.socketInteractor.selectEntered.AddListener(OnAttach);
             interactor.socketInteractor.selectExited.AddListener(OnDetach);
+
+            // Add event listener to the attachedGameObject's XRGrabInteractable
+            if (interactor.attachedGameObject != null)
+            {
+                var grabInteractable = interactor.attachedGameObject.GetComponent<XRGrabInteractable>();
+                if (grabInteractable != null)
+                {
+                    // Ensure the XRGrabInteractable is disabled initially
+                    grabInteractable.enabled = false;
+                    grabInteractable.selectEntered.AddListener(OnObjectGrabbed);
+                }
+            }
         }
     }
 
@@ -54,6 +56,16 @@ public class Operation : MonoBehaviour
         {
             interactor.socketInteractor.selectEntered.RemoveListener(OnAttach);
             interactor.socketInteractor.selectExited.RemoveListener(OnDetach);
+
+            // Remove event listener from the XRGrabInteractable
+            if (interactor.attachedGameObject != null)
+            {
+                var grabInteractable = interactor.attachedGameObject.GetComponent<XRGrabInteractable>();
+                if (grabInteractable != null)
+                {
+                    grabInteractable.selectEntered.RemoveListener(OnObjectGrabbed);
+                }
+            }
         }
     }
 
@@ -63,7 +75,12 @@ public class Operation : MonoBehaviour
         {
             if (ReferenceEquals(interactor.socketInteractor, args.interactorObject))
             {
-                Debug.Log("Non puoi scollegare l'oggetto");
+                if (interactor.isLocked)
+                {
+                    // Prevent detachment by re-selecting the object
+                    interactor.socketInteractor.StartManualInteraction(interactor.attachedGameObject.GetComponent<IXRSelectInteractable>());
+                    Debug.Log("Non puoi scollegare l'oggetto");
+                }
             }
         }
     }
@@ -81,9 +98,6 @@ public class Operation : MonoBehaviour
                         interactor.isLocked = true;
                         AttachObject(interactor);
 
-                        // Rimuovi la freccia quando l'oggetto viene afferrato
-                        RemoveArrow();
-
                         currentIndex++;
                         if (currentIndex < socketMessages.Count)
                         {
@@ -99,6 +113,12 @@ public class Operation : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnObjectGrabbed(SelectEnterEventArgs args)
+    {
+        // Remove the arrow when the object is grabbed
+        RemoveArrow();
     }
 
     private void UpdateMessage()
@@ -130,22 +150,36 @@ public class Operation : MonoBehaviour
         var attachedObject = interactor.attachedGameObject;
         if (attachedObject != null)
         {
-            var fixedJoint = attachedObject.AddComponent<FixedJoint>();
-            var connectedBody = interactor.socketInteractor.GetComponent<Rigidbody>();
-            if (connectedBody != null)
+            // Disabilita XRGrabInteractable per prevenire ulteriori interazioni
+            var grabInteractable = attachedObject.GetComponent<XRGrabInteractable>();
+            if (grabInteractable != null)
             {
-                fixedJoint.connectedBody = connectedBody;
-                if (currentArrow != null)
-                {
-                    Destroy(currentArrow);
-                }
+                grabInteractable.enabled = false;
+                grabInteractable.selectEntered.RemoveListener(OnObjectGrabbed);
             }
-            else
+
+            // Configura il Rigidbody
+            var rigidbody = attachedObject.GetComponent<Rigidbody>();
+            if (rigidbody != null)
             {
-                Debug.LogError("Il GameObject collegato non ha un Rigidbody!");
+                rigidbody.isKinematic = true;
+                rigidbody.useGravity = false;
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
             }
+
+            // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
+            Transform attachTransform = interactor.socketInteractor.attachTransform != null ?
+                interactor.socketInteractor.attachTransform : interactor.socketInteractor.transform;
+
+            attachedObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
+
+            // Se necessario, genitorizza l'oggetto al socket interactor
+            attachedObject.transform.SetParent(interactor.socketInteractor.transform, true);
         }
     }
+
+
 
     private void AddArrow(int index)
     {
@@ -171,4 +205,13 @@ public class Operation : MonoBehaviour
             currentArrow = null;
         }
     }
+
+    private void Update()
+    {
+        if(currentArrow != null)
+        {
+            currentArrow.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+        }
+    }
 }
+
