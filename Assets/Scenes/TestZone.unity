@@ -206,7 +206,8 @@ PrefabInstance:
       value: CAR2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -5463320310375195748, guid: b384f03b3c9ba8c438a77e6881abbfaf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b384f03b3c9ba8c438a77e6881abbfaf, type: 3}
