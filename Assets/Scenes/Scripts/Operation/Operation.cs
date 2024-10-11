@@ -4,15 +4,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
 
-[Serializable]
-public class SocketMessage
-{
-    public XRSocketInteractor socketInteractor;
-    public string message;
-    public bool isLocked = false;
-    public GameObject attachedGameObject;
-}
-
 public class Operation : MonoBehaviour
 {
     [SerializeField] private List<SocketMessage> socketMessages;
