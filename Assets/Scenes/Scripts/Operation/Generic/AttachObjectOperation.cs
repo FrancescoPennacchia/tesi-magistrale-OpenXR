@@ -72,8 +72,8 @@ public class AttachObjectOperation : BaseOperation
             {
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
-                rigidbody.velocity = Vector3.zero;
-                rigidbody.angularVelocity = Vector3.zero;
+                //rigidbody.velocity = Vector3.zero;
+                //rigidbody.angularVelocity = Vector3.zero;
                 Debug.Log("Rigidbody configurato per " + targetObject.name);
             }
 

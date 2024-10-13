@@ -5,11 +5,16 @@ using UnityEngine.XR.Interaction.Toolkit;
 [Serializable]
 public class OperationData
 {
-    public string instructionMessage;
-    [SerializeField, Tooltip("Object to attach")]
-    public GameObject targetObject;
-    public XRSocketInteractor socketInteractor;
+    [Header("Required input")]
     public OperationType operationType;
+    public string instructionMessage;
+    public GameObject targetObject;
+
+    [Header("Required for Attach")]
+    public XRSocketInteractor socketInteractor;
+
+    [Header("If require indicator")]
+    public bool indicatorEnabled;
 }
 
 public enum OperationType
