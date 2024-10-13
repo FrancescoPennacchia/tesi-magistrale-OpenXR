@@ -1,12 +1,13 @@
-using System.Collections.Generic;
-using System;
-using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
+using TMPro;
+using System;
 
 public class OperationManager : MonoBehaviour
 {
     [SerializeField] private List<OperationData> operationsData;
     [SerializeField] private TMP_Text instructionText;
+
     private BaseOperation currentOperation;
     private int currentOperationIndex = 0;
 
@@ -21,12 +22,16 @@ public class OperationManager : MonoBehaviour
         {
             var data = operationsData[currentOperationIndex];
             instructionText.text = data.instructionMessage;
+
             currentOperation = CreateOperation(data);
             currentOperation.StartOperation();
+
+            Debug.Log("Operazione " + currentOperationIndex + " avviata: " + data.instructionMessage);
         }
         else
         {
             instructionText.text = "Hai completato tutte le operazioni!";
+            Debug.Log("Tutte le operazioni sono state completate.");
         }
     }
 
@@ -37,6 +42,7 @@ public class OperationManager : MonoBehaviour
             case OperationType.AttachObject:
                 var attachOp = gameObject.AddComponent<AttachObjectOperation>();
                 attachOp.targetObject = data.targetObject;
+                attachOp.socketInteractor = data.socketInteractor;
                 return attachOp;
 
             case OperationType.UnscrewBolt:
@@ -44,7 +50,6 @@ public class OperationManager : MonoBehaviour
                 unscrewOp.bolt = data.targetObject;
                 return unscrewOp;
 
-            // Gestisci altri tipi di operazioni
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");
         }
@@ -55,8 +60,10 @@ public class OperationManager : MonoBehaviour
         if (currentOperation != null && currentOperation.IsOperationComplete())
         {
             Destroy(currentOperation);
+            currentOperation = null;
             currentOperationIndex++;
             StartNextOperation();
         }
     }
 }
+

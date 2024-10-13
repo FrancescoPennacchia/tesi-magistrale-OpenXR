@@ -5,41 +5,41 @@ public class AttachObjectOperation : BaseOperation
 {
     public GameObject targetObject;
     public XRSocketInteractor socketInteractor;
+
     private bool isCompleted = false;
 
     public override void StartOperation()
     {
-        if (targetObject != null)
+        if (targetObject == null)
         {
-            // Abilita l'interazione con l'oggetto target
-            var interactable = targetObject.GetComponent<XRGrabInteractable>();
-            if (interactable != null)
-            {
-                interactable.enabled = true;
-                Debug.Log("XRGrabInteractable abilitato per " + targetObject.name);
-            }
-            else
-            {
-                Debug.LogError("XRGrabInteractable non trovato su " + targetObject.name);
-            }
+            Debug.LogError("TargetObject non assegnato in AttachObjectOperation.");
+            return;
+        }
 
-            // Aggiungi listener all'evento selectEntered del socketInteractor
-            if (socketInteractor != null)
-            {
-                socketInteractor.selectEntered.AddListener(OnObjectAttached);
-                Debug.Log("Listener aggiunto al socketInteractor " + socketInteractor.name);
-            }
-            else
-            {
-                Debug.LogError("SocketInteractor non assegnato in AttachObjectOperation.");
-            }
+        if (socketInteractor == null)
+        {
+            Debug.LogError("SocketInteractor non assegnato in AttachObjectOperation.");
+            return;
+        }
+
+        // Abilita l'interazione con l'oggetto target
+        var interactable = targetObject.GetComponent<XRGrabInteractable>();
+        if (interactable != null)
+        {
+            interactable.enabled = true;
+            Debug.Log("XRGrabInteractable abilitato per " + targetObject.name);
         }
         else
         {
-            Debug.LogError("TargetObject non assegnato in AttachObjectOperation.");
+            Debug.LogError("XRGrabInteractable non trovato su " + targetObject.name);
         }
 
-        // Aggiungi un indicatore visivo se necessario
+        // Aggiungi listener all'evento selectEntered del socketInteractor
+        socketInteractor.selectEntered.AddListener(OnObjectAttached);
+        Debug.Log("Listener aggiunto al socketInteractor " + socketInteractor.name);
+
+        // Opzionale: Disabilita il XRGrabInteractable sul socketInteractor per impedire la rimozione
+        // socketInteractor.allowSelect = false;
     }
 
     public override bool IsOperationComplete()
@@ -49,8 +49,11 @@ public class AttachObjectOperation : BaseOperation
 
     private void OnObjectAttached(SelectEnterEventArgs args)
     {
+        GameObject attachedObject = args.interactableObject.transform.gameObject;
+        Debug.Log("OnObjectAttached chiamato con: " + attachedObject.name);
+
         // Verifica se l'oggetto inserito è quello target
-        if (args.interactableObject.transform.gameObject == targetObject)
+        if (attachedObject == targetObject)
         {
             isCompleted = true;
             Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket.");
@@ -63,16 +66,44 @@ public class AttachObjectOperation : BaseOperation
                 Debug.Log("XRGrabInteractable disabilitato per " + targetObject.name);
             }
 
-            // Rimuovi listener
-            if (socketInteractor != null)
+            // Configura il Rigidbody dell'oggetto
+            var rigidbody = targetObject.GetComponent<Rigidbody>();
+            if (rigidbody != null)
             {
-                socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
-                Debug.Log("Listener rimosso dal socketInteractor " + socketInteractor.name);
+                rigidbody.isKinematic = true;
+                rigidbody.useGravity = false;
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+                Debug.Log("Rigidbody configurato per " + targetObject.name);
             }
 
-            // Rimuovi l'indicatore visivo se presente
+            // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
+            Transform attachTransform = socketInteractor.attachTransform != null ? socketInteractor.attachTransform : socketInteractor.transform;
+            targetObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
+            Debug.Log("Posizione e rotazione di " + targetObject.name + " allineate al socket.");
 
-            // Eventuale logica aggiuntiva al completamento dell'operazione
+            // Genitorizza l'oggetto al socket interactor
+            targetObject.transform.SetParent(socketInteractor.transform, true);
+            Debug.Log(targetObject.name + " genitorizzato al socketInteractor.");
+
+            // Rimuovi listener
+            socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
+            Debug.Log("Listener rimosso dal socketInteractor " + socketInteractor.name);
+
+            // Eventuali azioni post-completamento
+        }
+        else
+        {
+            Debug.LogWarning("L'oggetto inserito non è quello previsto.");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Rimuovi il listener per evitare problemi
+        if (socketInteractor != null)
+        {
+            socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
         }
     }
 }
