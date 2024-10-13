@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39fca9892f5c9b4a9f419f0f0dce664, type: 3}
   m_Name: test
   m_EditorClassIdentifier: 
-  instructionMessage: Test
-  targetObject: {fileID: 919132149155446097, guid: f2110f23f107b174186bdcb3d376b30c,
+  instructionMessage: Collegare L'orggetto
+  targetObject: {fileID: 2952680518277849551, guid: 4cecc99366c31c940922cdf6dc3e87bf,
     type: 3}
   operationType: 0
