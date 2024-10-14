@@ -15,10 +15,12 @@ public class OperationData
 
     [Header("If require indicator")]
     public bool indicatorEnabled;
+    public GameObject indicatorPrefab;
 }
 
 public enum OperationType
 {
     AttachObject,
-    UnscrewBolt
+    UnscrewBolt,
+    ScrewBolt
 }

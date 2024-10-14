@@ -43,12 +43,38 @@ public class OperationManager : MonoBehaviour
                 var attachOp = gameObject.AddComponent<AttachObjectOperation>();
                 attachOp.targetObject = data.targetObject;
                 attachOp.socketInteractor = data.socketInteractor;
+                if(data.indicatorEnabled && data.indicatorPrefab != null)
+                {
+                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
+                    var indicatorScript = indicator.AddComponent<Indicator>();
+                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
+                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
+                }
                 return attachOp;
 
             case OperationType.UnscrewBolt:
                 var unscrewOp = gameObject.AddComponent<UnscrewBoltOperation>();
                 unscrewOp.bolt = data.targetObject;
+                if (data.indicatorEnabled && data.indicatorPrefab != null)
+                {
+                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
+                    var indicatorScript = indicator.AddComponent<Indicator>();
+                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
+                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
+                }
                 return unscrewOp;
+
+            case OperationType.ScrewBolt:
+                var screwOp = gameObject.AddComponent<ScrewBoltOperation>();
+                screwOp.bolt = data.targetObject;
+                if (data.indicatorEnabled && data.indicatorPrefab != null)
+                {
+                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
+                    var indicatorScript = indicator.AddComponent<Indicator>();
+                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
+                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
+                }
+                return screwOp;
 
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");
@@ -59,6 +85,13 @@ public class OperationManager : MonoBehaviour
     {
         if (currentOperation != null && currentOperation.IsOperationComplete())
         {
+            Indicator indicator = currentOperation.GetComponent<Indicator>();
+            // Cancella l'indicatore se presente
+            if (indicator != null)
+            {
+                Destroy(indicator.currentArrow); // Cancella la freccia (GameObject)
+                Destroy(indicator); // Cancella il componente Indicator
+            }
             Destroy(currentOperation);
             currentOperation = null;
             currentOperationIndex++;
