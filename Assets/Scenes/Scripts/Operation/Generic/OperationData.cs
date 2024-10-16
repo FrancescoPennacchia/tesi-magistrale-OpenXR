@@ -22,5 +22,6 @@ public enum OperationType
 {
     AttachObject,
     UnscrewBolt,
-    ScrewBolt
+    ScrewBolt,
+    Destroy
 }

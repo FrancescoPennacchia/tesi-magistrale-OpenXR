@@ -64,6 +64,12 @@ public class OperationManager : MonoBehaviour
                 operation = screwOp;
                 break;
 
+            case OperationType.Destroy:
+                var destroyOp = operationObject.AddComponent<Destroy>();
+                destroyOp.destroyObj = data.targetObject;
+                operation = destroyOp;
+                break;
+
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");
         }
