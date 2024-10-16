@@ -192,6 +192,8 @@ public class Operation : MonoBehaviour
             currentArrow = Instantiate(arrow, currentObject.transform.position + Vector3.up * 0.5f, arrow.transform.rotation);
             currentArrow.transform.SetParent(currentObject.transform);
             initialPosition = currentArrow.transform.localPosition;
+            currentArrow.transform.rotation = Quaternion.Euler(0, 0, 90);
+            currentArrow.transform.localScale = new Vector3(2000f, 2000f, 2000f);
         }
     }
 

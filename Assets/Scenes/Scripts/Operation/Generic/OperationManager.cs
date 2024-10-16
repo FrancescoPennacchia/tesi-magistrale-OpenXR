@@ -37,66 +37,63 @@ public class OperationManager : MonoBehaviour
 
     private BaseOperation CreateOperation(OperationData data)
     {
+        // Crea un nuovo GameObject per l'operazione
+        GameObject operationObject = new GameObject("Operation_" + data.operationType + "_" + currentOperationIndex);
+        operationObject.transform.parent = this.transform; // Genitorizza all'OperationManager
+
+        BaseOperation operation = null;
+
         switch (data.operationType)
         {
             case OperationType.AttachObject:
-                var attachOp = gameObject.AddComponent<AttachObjectOperation>();
+                var attachOp = operationObject.AddComponent<AttachObjectOperation>();
                 attachOp.targetObject = data.targetObject;
                 attachOp.socketInteractor = data.socketInteractor;
-                if(data.indicatorEnabled && data.indicatorPrefab != null)
-                {
-                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
-                    var indicatorScript = indicator.AddComponent<Indicator>();
-                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
-                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
-                }
-                return attachOp;
+                operation = attachOp;
+                break;
 
             case OperationType.UnscrewBolt:
-                var unscrewOp = gameObject.AddComponent<UnscrewBoltOperation>();
+                var unscrewOp = operationObject.AddComponent<UnscrewBoltOperation>();
                 unscrewOp.bolt = data.targetObject;
-                if (data.indicatorEnabled && data.indicatorPrefab != null)
-                {
-                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
-                    var indicatorScript = indicator.AddComponent<Indicator>();
-                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
-                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
-                }
-                return unscrewOp;
+                operation = unscrewOp;
+                break;
 
             case OperationType.ScrewBolt:
-                var screwOp = gameObject.AddComponent<ScrewBoltOperation>();
+                var screwOp = operationObject.AddComponent<ScrewBoltOperation>();
                 screwOp.bolt = data.targetObject;
-                if (data.indicatorEnabled && data.indicatorPrefab != null)
-                {
-                    var indicator = Instantiate(data.indicatorPrefab, gameObject.transform);
-                    var indicatorScript = indicator.AddComponent<Indicator>();
-                    indicatorScript.currentArrow = indicator; // Assegna l'indicatore prefab come freccia
-                    indicatorScript.initialPosition = data.targetObject.transform.localPosition;
-                }
-                return screwOp;
+                operation = screwOp;
+                break;
 
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");
         }
+
+        // Aggiungi l'Indicator all'operationObject se necessario
+        if (data.indicatorEnabled && data.indicatorPrefab != null)
+        {
+            var indicator = operationObject.AddComponent<Indicator>();
+            indicator.arrowPrefab = data.indicatorPrefab; // Assegna il prefab della freccia
+            indicator.gameTarget = data.targetObject;     // Assegna l'oggetto target
+        }
+
+        return operation;
     }
+
 
     private void Update()
     {
         if (currentOperation != null && currentOperation.IsOperationComplete())
         {
-            Indicator indicator = currentOperation.GetComponent<Indicator>();
-            // Cancella l'indicatore se presente
+            Indicator indicator = currentOperation.gameObject.GetComponent<Indicator>();
             if (indicator != null)
             {
-                Destroy(indicator.currentArrow); // Cancella la freccia (GameObject)
-                Destroy(indicator); // Cancella il componente Indicator
+                indicator.DestroyArrow(); // Distrugge la freccia e rimuove il componente
             }
-            Destroy(currentOperation);
+
+            Destroy(currentOperation.gameObject); // Distrugge l'operationObject intero
             currentOperation = null;
             currentOperationIndex++;
             StartNextOperation();
         }
     }
 }
-

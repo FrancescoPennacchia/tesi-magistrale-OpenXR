@@ -1,35 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Indicator : MonoBehaviour
 {
+    public GameObject arrowPrefab;
     public GameObject currentArrow;
     public GameObject gameTarget;
-    public Vector3 initialPosition;
-    private float oscillationSpeed = 2f; // Velocità dell'oscillazione
-    private float oscillationAmplitude = 1f; // Ampiezza dell'oscillazione (in unità di posizione)
-    private float verticalOffset = 10f; // Offset verticale per la posizione iniziale
+    private Vector3 initialPosition;
+    private float oscillationSpeed = 0.2f; // Velocità dell'oscillazione
+    private float oscillationAmplitude = 0.01f; // Ampiezza dell'oscillazione
+    private float verticalOffset = 0.2f; // Offset verticale
 
-    // Start is called before the first frame update
     void Start()
     {
-        if (currentArrow != null)
+        if (arrowPrefab != null && gameTarget != null)
         {
-            // Aggiungi l'offset verticale alla posizione iniziale
-            currentArrow.transform.localPosition = initialPosition + new Vector3(0, 0, verticalOffset);
+            Vector3 arrowPosition = gameTarget.transform.position + new Vector3(0, verticalOffset, 0);
+            currentArrow = Instantiate(arrowPrefab, arrowPosition, Quaternion.identity);
+            currentArrow.transform.rotation = Quaternion.Euler(0, 0, 90);
+            currentArrow.transform.localScale = new Vector3(5f, 5f, 5f);
+            currentArrow.transform.SetParent(gameTarget.transform);
+            initialPosition = currentArrow.transform.localPosition;
+        }
+        else
+        {
+            Debug.LogError("arrowPrefab o gameTarget non assegnato nell'Indicator.");
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentArrow != null)
         {
-            // Calcola lo spostamento laterale utilizzando una funzione sinusoidale
             float offset = Mathf.Sin(Time.time * oscillationSpeed) * oscillationAmplitude;
-            // Aggiorna la posizione locale della freccia
-            currentArrow.transform.localPosition = initialPosition + new Vector3(offset, 0, verticalOffset);
+            currentArrow.transform.localPosition = initialPosition + new Vector3(offset, 0, 0);
         }
+    }
+
+    public void DestroyArrow()
+    {
+        if (currentArrow != null)
+        {
+            Destroy(currentArrow);
+            currentArrow = null;
+        }
+        Destroy(this); 
     }
 }

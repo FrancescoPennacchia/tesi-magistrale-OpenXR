@@ -6,7 +6,7 @@ public class ScrewBoltOperation : BaseOperation
     public GameObject bolt;              // Il bullone da avvitare
     private bool isScrewed = false;
     private float totalRotation = 0f;
-    private float requiredRotation = 300f;    // Rotazione necessaria per avvitare il bullone
+    private float requiredRotation = 120;    // Rotazione necessaria per avvitare il bullone
     private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
     private float liftAmount = 0.1f;          // Quantità di abbassamento per ogni passo di rotazione
     private float rotationSpeed = 50f;        // Velocità di rotazione in gradi per secondo
