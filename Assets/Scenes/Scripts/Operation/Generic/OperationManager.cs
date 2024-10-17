@@ -70,6 +70,30 @@ public class OperationManager : MonoBehaviour
                 operation = destroyOp;
                 break;
 
+            case OperationType.OperationSocketDisable:
+                var socketDisableOp = operationObject.AddComponent<OperationSocketDisable>();
+                socketDisableOp.socketInteractor = data.socketInteractor;
+                operation = socketDisableOp;
+                break;
+
+            case OperationType.OperationSocketActivation:
+                var socketActivationOp = operationObject.AddComponent<OperationSocketActivation>();
+                socketActivationOp.socketInteractor = data.socketInteractor;
+                operation = socketActivationOp;
+                break;
+
+            case OperationType.OperationDisableXRGrab:
+                var disableGrabOp = operationObject.AddComponent<OperationDisableXRGrab>();
+                disableGrabOp.grabInteractable = data.grabInteractable;
+                operation = disableGrabOp;
+                break;
+
+            case OperationType.OperationEnableXRGrab:
+                var enableGrabOp = operationObject.AddComponent<OperationEnableXRGrab>();
+                enableGrabOp.grabInteractable = data.grabInteractable;
+                operation = enableGrabOp;
+                break;
+
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");
         }

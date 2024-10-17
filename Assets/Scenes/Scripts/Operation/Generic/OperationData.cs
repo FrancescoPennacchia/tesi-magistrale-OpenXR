@@ -10,12 +10,15 @@ public class OperationData
     public string instructionMessage;
     public GameObject targetObject;
 
-    [Header("Required for Attach")]
+    [Header("Required for Attach e XRSocket Menager")]
     public XRSocketInteractor socketInteractor;
 
     [Header("If require indicator")]
     public bool indicatorEnabled;
     public GameObject indicatorPrefab;
+
+    [Header("Rquired for XRGrabInteractable")]
+    public XRGrabInteractable grabInteractable;
 }
 
 public enum OperationType
@@ -23,5 +26,9 @@ public enum OperationType
     AttachObject,
     UnscrewBolt,
     ScrewBolt,
-    Destroy
+    Destroy,
+    OperationSocketDisable,
+    OperationSocketActivation,
+    OperationDisableXRGrab,
+    OperationEnableXRGrab
 }
