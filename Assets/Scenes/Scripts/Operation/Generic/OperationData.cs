@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [Serializable]
-public class OperationData
+public class OperationData 
 {
     [Header("Required input")]
     public OperationType operationType;
