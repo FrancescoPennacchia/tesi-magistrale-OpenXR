@@ -588,6 +588,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1001332262711235105, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.034
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001332262711235105, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001332262711235105, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.155
+      objectReference: {fileID: 0}
     - target: {fileID: 1460096208092755988, guid: dacd6d6f266e9db43b071b6f115ebb7a,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -647,6 +662,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389090047427897304, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.034
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389090047427897304, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389090047427897304, guid: dacd6d6f266e9db43b071b6f115ebb7a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.155
       objectReference: {fileID: 0}
     - target: {fileID: 7477649625978705506, guid: dacd6d6f266e9db43b071b6f115ebb7a,
         type: 3}
@@ -713,6 +743,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448122297582721696, guid: 7f11d0bd3d9ae534a9b841a6998367ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8052882084899838987, guid: 7f11d0bd3d9ae534a9b841a6998367ea,
         type: 3}
@@ -800,6 +835,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prototipo Cambio Ruota
       objectReference: {fileID: 0}
+    - target: {fileID: 259147089955390279, guid: c25b9e38f4cc3d747a7fbb7a6e7ba042,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6290672278563984214, guid: c25b9e38f4cc3d747a7fbb7a6e7ba042,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -872,6 +912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: change_candela
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687954110912457858, guid: cee89755a2e5fd541803e982c1e0ba09,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005468420532140186, guid: cee89755a2e5fd541803e982c1e0ba09,
         type: 3}
