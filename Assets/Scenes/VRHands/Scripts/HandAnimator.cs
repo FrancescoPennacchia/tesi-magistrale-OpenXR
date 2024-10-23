@@ -3,6 +3,97 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
+
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Hands;
+
+[RequireComponent(typeof(Animator))]
+public class HandAnimator : MonoBehaviour
+{
+    private Animator handAnimator = null;
+    private XRHandSubsystem handSubsystem;
+    private XRHand leftHand;
+    private XRHand rightHand;
+
+    private void Start()
+    {
+        handAnimator = GetComponent<Animator>();
+        handSubsystem = GetHandSubsystem();
+
+        if (handSubsystem == null)
+        {
+            Debug.LogError("Hand Subsystem not found. Make sure hand tracking is enabled in your project settings.");
+        }
+    }
+
+    private XRHandSubsystem GetHandSubsystem()
+    {
+        var subsystems = new List<XRHandSubsystem>();
+        SubsystemManager.GetSubsystems(subsystems);
+        return subsystems.Count > 0 ? subsystems[0] : null;
+    }
+
+    private void Update()
+    {
+        if (handSubsystem == null || !handSubsystem.running)
+            return;
+
+        leftHand = handSubsystem.leftHand;
+        rightHand = handSubsystem.rightHand;
+
+        if (rightHand.isTracked)
+        {
+            UpdateHandAnimation(rightHand);
+        }
+
+        if (leftHand.isTracked)
+        {
+            UpdateHandAnimation(leftHand);
+        }
+    }
+
+    private void UpdateHandAnimation(XRHand hand)
+    {
+        if (!hand.isTracked)
+            return;
+
+        // Update for each finger
+        UpdateFingerCurl(FingerType.Thumb, hand, XRHandJointID.ThumbTip);
+        UpdateFingerCurl(FingerType.Index, hand, XRHandJointID.IndexTip);
+        UpdateFingerCurl(FingerType.Middle, hand, XRHandJointID.MiddleTip);
+        UpdateFingerCurl(FingerType.Ring, hand, XRHandJointID.RingTip);
+        UpdateFingerCurl(FingerType.Pinky, hand, XRHandJointID.LittleTip);
+    }
+
+    private void UpdateFingerCurl(FingerType fingerType, XRHand hand, XRHandJointID jointID)
+    {
+        XRHandJoint rootJoint = hand.GetJoint(XRHandJointID.Wrist);
+        XRHandJoint tipJoint = hand.GetJoint(jointID);
+
+        if (!rootJoint.Equals(default(XRHandJoint)) && !tipJoint.Equals(default(XRHandJoint)))
+        {
+            Pose rootPose, tipPose;
+            if (rootJoint.TryGetPose(out rootPose) && tipJoint.TryGetPose(out tipPose))
+            {
+                float curlValue = CalculateFingerCurl(rootPose, tipPose);
+                handAnimator.SetFloat(fingerType.ToString(), curlValue);
+            }
+        }
+    }
+
+    private float CalculateFingerCurl(Pose rootPose, Pose tipPose)
+    {
+        Vector3 direction = tipPose.position - rootPose.position;
+        float curl = Vector3.Angle(rootPose.forward, direction); // Migliora la direzione del calcolo
+        float normalizedCurl = Mathf.InverseLerp(0, 90, curl);
+        return normalizedCurl;
+    }
+}
+
+
+/*
 [RequireComponent(typeof(Animator))]
 public class HandAnimator : MonoBehaviour
 {
@@ -116,4 +207,4 @@ public class HandAnimator : MonoBehaviour
             handAnimator.SetFloat(fingerName, animationBlendValue);
         }
     }
-}
+}*/
