@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Hands;
-
+/*
 [RequireComponent(typeof(Animator))]
 public class HandAnimator : MonoBehaviour
 {
@@ -90,10 +90,10 @@ public class HandAnimator : MonoBehaviour
         float normalizedCurl = Mathf.InverseLerp(0, 90, curl);
         return normalizedCurl;
     }
-}
+}*/
 
 
-/*
+
 [RequireComponent(typeof(Animator))]
 public class HandAnimator : MonoBehaviour
 {
@@ -207,4 +207,4 @@ public class HandAnimator : MonoBehaviour
             handAnimator.SetFloat(fingerName, animationBlendValue);
         }
     }
-}*/
+}
