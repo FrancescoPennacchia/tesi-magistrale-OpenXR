@@ -2,22 +2,22 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[Serializable]
+[System.Serializable]
 public class OperationData 
 {
-    [Header("Required input")]
+    //[Header("Required input")]
     public OperationType operationType;
     public string instructionMessage;
     public GameObject targetObject;
 
-    [Header("Required for Attach e XRSocket Menager")]
+    //[Header("Required for Attach e XRSocket Menager")]
     public XRSocketInteractor socketInteractor;
 
-    [Header("If require indicator")]
+    //[Header("If require indicator")]
     public bool indicatorEnabled;
     public GameObject indicatorPrefab;
 
-    [Header("Rquired for XRGrabInteractable")]
+    //[Header("Rquired for XRGrabInteractable")]
     public XRGrabInteractable grabInteractable;
 }
 
