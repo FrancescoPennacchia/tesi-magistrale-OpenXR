@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-
+/*
 [CustomEditor(typeof(OperationData))]
 public class OperationDataEditor : Editor
 {
@@ -52,6 +52,6 @@ public class OperationDataEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
     }
-}
+}*/
 
 
