@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[System.Serializable]
-public class OperationData 
+[Serializable]
+public class OperationData
 {
     //[Header("Required input")]
     public OperationType operationType;

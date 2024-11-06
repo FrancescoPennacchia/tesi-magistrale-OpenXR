@@ -1,5 +1,7 @@
 using UnityEditor;
-/*
+using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+
 [CustomEditor(typeof(OperationData))]
 public class OperationDataEditor : Editor
 {
@@ -15,6 +17,7 @@ public class OperationDataEditor : Editor
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable called");
         operationType = serializedObject.FindProperty("operationType");
         instructionMessage = serializedObject.FindProperty("instructionMessage");
         targetObject = serializedObject.FindProperty("targetObject");
@@ -26,21 +29,29 @@ public class OperationDataEditor : Editor
 
     public override void OnInspectorGUI()
     {
-
+        Debug.Log("OnInspectorGUI called");
         serializedObject.Update();
 
+        // Display properties
         EditorGUILayout.PropertyField(operationType);
-        
         EditorGUILayout.PropertyField(instructionMessage);
         EditorGUILayout.PropertyField(targetObject);
         EditorGUILayout.PropertyField(socketInteractor);
         EditorGUILayout.PropertyField(indicatorEnabled);
         EditorGUILayout.PropertyField(indicatorPrefab);
-        //EditorGUILayout.PropertyField(grabInteractable);
 
+        // Conditional display for grabInteractable
+        OperationType currentOperationType = (OperationType)operationType.enumValueIndex;
+        Debug.Log("Current Operation Type: " + currentOperationType);
+
+        if (currentOperationType == OperationType.OperationDisableXRGrab ||
+            currentOperationType == OperationType.OperationEnableXRGrab)
+        {
+            EditorGUILayout.PropertyField(grabInteractable);
+        }
 
         serializedObject.ApplyModifiedProperties();
-
     }
 }
-*/
+
+

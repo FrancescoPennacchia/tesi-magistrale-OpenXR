@@ -279,14 +279,7 @@ MonoBehaviour:
     indicatorEnabled: 0
     indicatorPrefab: {fileID: 0}
     grabInteractable: {fileID: 0}
-  - operationType: 0
-    instructionMessage: 
-    targetObject: {fileID: 0}
-    socketInteractor: {fileID: 0}
-    indicatorEnabled: 0
-    indicatorPrefab: {fileID: 0}
-    grabInteractable: {fileID: 0}
-  - operationType: 0
+  - operationType: 4
     instructionMessage: 
     targetObject: {fileID: 0}
     socketInteractor: {fileID: 0}
@@ -781,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 5448122297582721696, guid: 7f11d0bd3d9ae534a9b841a6998367ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8052882084899838987, guid: 7f11d0bd3d9ae534a9b841a6998367ea,
         type: 3}
@@ -1005,6 +998,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1260145249}
     m_Modifications:
+    - target: {fileID: 895793163458482412, guid: cee89755a2e5fd541803e982c1e0ba09,
+        type: 3}
+      propertyPath: operationsData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 895793163458482412, guid: cee89755a2e5fd541803e982c1e0ba09,
+        type: 3}
+      propertyPath: operationsData.Array.data[3].targetObject
+      value: 
+      objectReference: {fileID: 4187639793511285361}
+    - target: {fileID: 895793163458482412, guid: cee89755a2e5fd541803e982c1e0ba09,
+        type: 3}
+      propertyPath: operationsData.Array.data[3].operationType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 895793163458482412, guid: cee89755a2e5fd541803e982c1e0ba09,
+        type: 3}
+      propertyPath: operationsData.Array.data[3].instructionMessage
+      value: Avvitare la nuova candela.
+      objectReference: {fileID: 0}
     - target: {fileID: 3126510635935254815, guid: cee89755a2e5fd541803e982c1e0ba09,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -1018,7 +1031,7 @@ PrefabInstance:
     - target: {fileID: 8687954110912457858, guid: cee89755a2e5fd541803e982c1e0ba09,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9005468420532140186, guid: cee89755a2e5fd541803e982c1e0ba09,
         type: 3}
@@ -1078,6 +1091,12 @@ PrefabInstance:
 --- !u!4 &4187639793511285360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9005468420532140186, guid: cee89755a2e5fd541803e982c1e0ba09,
+    type: 3}
+  m_PrefabInstance: {fileID: 4187639793511285359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4187639793511285361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6167083951175974089, guid: cee89755a2e5fd541803e982c1e0ba09,
     type: 3}
   m_PrefabInstance: {fileID: 4187639793511285359}
   m_PrefabAsset: {fileID: 0}
