@@ -93,6 +93,11 @@ public class OperationManager : MonoBehaviour
                 enableGrabOp.grabInteractable = data.grabInteractable;
                 operation = enableGrabOp;
                 break;
+            case OperationType.LightIndicator:
+                var lightIndicatorOp = operationObject.AddComponent<LightIndicator>();
+                lightIndicatorOp.indicatorPrefab = data.indicatorPrefab;
+                operation = lightIndicatorOp;
+                break;
 
             default:
                 throw new NotImplementedException("Tipo di operazione non gestito.");

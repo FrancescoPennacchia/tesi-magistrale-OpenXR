@@ -70,6 +70,10 @@ public class OperationDataDrawer : PropertyDrawer
         {
             EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), grabInteractable);
             position.y += EditorGUIUtility.singleLineHeight + 2;
+        } else if (operationType.enumValueIndex == (int)OperationType.LightIndicator)
+        {
+            EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), indicatorPrefab);
+            position.y += EditorGUIUtility.singleLineHeight + 2;
         }
 
         EditorGUI.indentLevel--;
