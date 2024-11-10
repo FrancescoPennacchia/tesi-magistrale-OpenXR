@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 276594329386536507}
   m_Layer: 0
-  m_Name: Bolt Jeep
+  m_Name: Bolt Jeep  With Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620786185551778945}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03293327, y: 0.7063394, z: 0.7063394, w: 0.03293327}
-  m_LocalPosition: {x: -0.0409, y: -0.1085, z: -0.052}
+  m_LocalRotation: {x: -0.03293324, y: 0.7063395, z: 0.7063394, w: 0.032933235}
+  m_LocalPosition: {x: -0.00059993175, y: -0.07839999, z: -0.048399977}
   m_LocalScale: {x: 63, y: 65.69656, z: 63}
   m_ConstrainProportionsScale: 1
   m_Children:

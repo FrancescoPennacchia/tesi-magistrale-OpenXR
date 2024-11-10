@@ -4,6 +4,8 @@ using UnityEngine;
 public class UnscrewBoltOperation : BaseOperation
 {
     public GameObject bolt;              // Il bullone da svitare
+    public Asse rotationBolt;          // L'asse di rotazione del bullone
+    public Asse directionBolt;         // La direzione di sollevamento del bullone
     private bool isUnscrewed = false;
     private float totalRotation = 0f;
     private float requiredRotation = 300f;    // Rotazione necessaria per svitare il bullone
@@ -13,6 +15,9 @@ public class UnscrewBoltOperation : BaseOperation
     private float liftSpeed = 0.01f;          // Velocità di sollevamento per secondo
 
     private bool shouldRotateAndLift = false; // Flag per controllare la rotazione e il sollevamento
+
+    private Vector3 rotationAxis;
+    private Vector3 liftDirection;
 
     public override void StartOperation()
     {
@@ -39,6 +44,52 @@ public class UnscrewBoltOperation : BaseOperation
             boltCollider.isTrigger = true;
             Debug.Log("Impostato IsTrigger su true per il Collider del bullone.");
         }
+
+        switch (rotationBolt)
+        {
+            case Asse.XRight:
+                rotationAxis = Vector3.right;
+                break;
+            case Asse.XLeft:
+                rotationAxis = Vector3.left;
+                break;
+            case Asse.YUp:
+                rotationAxis = Vector3.up;
+                break;
+            case Asse.YDown:
+                rotationAxis = Vector3.down;
+                break;
+            case Asse.ZForward:
+                rotationAxis = Vector3.forward;
+                break;
+            case Asse.ZBack:
+                rotationAxis = Vector3.back;
+                break;
+        }
+
+        // Imposta la direzione di sollevamento
+        switch (directionBolt)
+        {
+            case Asse.XRight:
+                liftDirection = new Vector3(1, 0, -1); // Destra lungo l'asse X
+                break;
+            case Asse.XLeft:
+                liftDirection = new Vector3(-1, 0, 1); // Sinistra lungo l'asse X
+                break;
+            case Asse.YUp:
+                liftDirection = new Vector3(0, 1, 0); // Su lungo l'asse Y
+                break;
+            case Asse.YDown:
+                liftDirection = new Vector3(0, -1, 0); // Giù lungo l'asse Y
+                break;
+            case Asse.ZForward:
+                liftDirection = new Vector3(-1, 0, 1); // Avanti lungo l'asse Z
+                break;
+            case Asse.ZBack:
+                liftDirection = new Vector3(1, 0, -1); // Indietro lungo l'asse Z
+                break;
+        }
+
     }
 
     public override bool IsOperationComplete()
@@ -76,8 +127,8 @@ public class UnscrewBoltOperation : BaseOperation
             float rotationStep = rotationSpeed * Time.deltaTime; // Calcola la rotazione per frame
             float liftStep = liftSpeed * Time.deltaTime;         // Calcola il sollevamento per frame
 
-            bolt.transform.Rotate(Vector3.right, rotationStep, Space.Self); // Rotazione lungo l'asse X locale del bullone
-            bolt.transform.Translate(Vector3.up * liftStep, Space.World);    // Solleva il bullone lungo l'asse Y globale
+            //bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotazione lungo l'asse specificato
+            bolt.transform.Translate(liftDirection * liftStep, Space.World); // Solleva il bullone lungo l'asse specificato
             totalRotation += rotationStep;
 
             // Controlla se la rotazione ha raggiunto la soglia richiesta
@@ -92,7 +143,7 @@ public class UnscrewBoltOperation : BaseOperation
     private void OnOperationComplete()
     {
         // Disabilita il bullone
-        bolt.SetActive(false);
+        //bolt.SetActive(false);
         Debug.Log("Bullone svitato con successo!");
     }
 }

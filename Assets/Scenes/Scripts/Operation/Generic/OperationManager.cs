@@ -55,12 +55,16 @@ public class OperationManager : MonoBehaviour
             case OperationType.UnscrewBolt:
                 var unscrewOp = operationObject.AddComponent<UnscrewBoltOperation>();
                 unscrewOp.bolt = data.targetObject;
+                unscrewOp.rotationBolt = data.rotationBolt;
+                unscrewOp.directionBolt = data.directionBolt;
                 operation = unscrewOp;
                 break;
 
             case OperationType.ScrewBolt:
                 var screwOp = operationObject.AddComponent<ScrewBoltOperation>();
                 screwOp.bolt = data.targetObject;
+                screwOp.rotationBolt = data.rotationBolt;
+                screwOp.directionBolt = data.directionBolt;
                 operation = screwOp;
                 break;
 

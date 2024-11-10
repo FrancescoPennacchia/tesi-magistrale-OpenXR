@@ -19,7 +19,14 @@ public class OperationData
 
     //[Header("Rquired for XRGrabInteractable")]
     public XRGrabInteractable grabInteractable;
-}
+
+
+    //[Header("Direction")]
+    public Asse rotationBolt;
+    public Asse directionBolt;
+};
+
+public enum Asse { XLeft, XRight, YUp, YDown, ZForward, ZBack, }
 
 public enum OperationType
 {
