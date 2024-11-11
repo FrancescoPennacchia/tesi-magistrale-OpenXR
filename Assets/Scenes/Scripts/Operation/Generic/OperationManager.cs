@@ -88,13 +88,13 @@ public class OperationManager : MonoBehaviour
 
             case OperationType.OperationDisableXRGrab:
                 var disableGrabOp = operationObject.AddComponent<OperationDisableXRGrab>();
-                disableGrabOp.grabInteractable = data.grabInteractable;
+                disableGrabOp.targetObject = data.targetObject;
                 operation = disableGrabOp;
                 break;
 
             case OperationType.OperationEnableXRGrab:
                 var enableGrabOp = operationObject.AddComponent<OperationEnableXRGrab>();
-                enableGrabOp.grabInteractable = data.grabInteractable;
+                enableGrabOp.targetObject = data.targetObject;
                 operation = enableGrabOp;
                 break;
             case OperationType.LightIndicator:

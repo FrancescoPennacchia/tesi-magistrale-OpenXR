@@ -71,22 +71,22 @@ public class UnscrewBoltOperation : BaseOperation
         switch (directionBolt)
         {
             case Asse.XRight:
-                liftDirection = new Vector3(1, 0, -1); // Destra lungo l'asse X
+                liftDirection = Vector3.right;
                 break;
             case Asse.XLeft:
-                liftDirection = new Vector3(-1, 0, 1); // Sinistra lungo l'asse X
+                liftDirection = Vector3.left;
                 break;
             case Asse.YUp:
-                liftDirection = new Vector3(0, 1, 0); // Su lungo l'asse Y
+                liftDirection = Vector3.up;
                 break;
             case Asse.YDown:
-                liftDirection = new Vector3(0, -1, 0); // Giù lungo l'asse Y
+                liftDirection = Vector3.down;
                 break;
             case Asse.ZForward:
-                liftDirection = new Vector3(-1, 0, 1); // Avanti lungo l'asse Z
+                liftDirection = Vector3.forward;
                 break;
             case Asse.ZBack:
-                liftDirection = new Vector3(1, 0, -1); // Indietro lungo l'asse Z
+                liftDirection = Vector3.back;
                 break;
         }
 
@@ -127,8 +127,8 @@ public class UnscrewBoltOperation : BaseOperation
             float rotationStep = rotationSpeed * Time.deltaTime; // Calcola la rotazione per frame
             float liftStep = liftSpeed * Time.deltaTime;         // Calcola il sollevamento per frame
 
-            //bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotazione lungo l'asse specificato
-            bolt.transform.Translate(liftDirection * liftStep, Space.World); // Solleva il bullone lungo l'asse specificato
+            bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotazione lungo l'asse specificato
+            bolt.transform.Translate(liftDirection * liftStep, Space.Self); // Solleva il bullone lungo l'asse specificato
             totalRotation += rotationStep;
 
             // Controlla se la rotazione ha raggiunto la soglia richiesta
@@ -144,6 +144,20 @@ public class UnscrewBoltOperation : BaseOperation
     {
         // Disabilita il bullone
         //bolt.SetActive(false);
+        Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
+        boltRigidbody.isKinematic = false;
+        boltRigidbody.useGravity = true;
+
+        Collider boltCollider = bolt.GetComponent<Collider>();
+        boltCollider.isTrigger = false;
+
+
+        XRGrabInteractable grabInteractable = bolt.GetComponent<XRGrabInteractable>();
+        if (grabInteractable == null)
+        {
+            grabInteractable = bolt.AddComponent<XRGrabInteractable>();
+        }
+        grabInteractable.enabled = true;
         Debug.Log("Bullone svitato con successo!");
     }
 }

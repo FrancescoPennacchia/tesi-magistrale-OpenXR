@@ -3,25 +3,30 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class OperationEnableXRGrab : BaseOperation
 {
-    public XRGrabInteractable grabInteractable;
-    public bool isDisable = false;
+    public GameObject targetObject;
+    public bool isEnable= false;
 
     public override void StartOperation()
     {
+        Rigidbody targetObjectRigidbody = targetObject.GetComponent<Rigidbody>();
+        targetObjectRigidbody.isKinematic = false;
+        targetObjectRigidbody.useGravity = true;
 
-        if (grabInteractable != null)
+        Collider targetObjectCollider = targetObject.GetComponent<Collider>();
+        targetObjectCollider.isTrigger = false;
+
+
+        XRGrabInteractable grabInteractable = targetObject.GetComponent<XRGrabInteractable>();
+        if (grabInteractable == null)
         {
-            grabInteractable.enabled = true;
-            isDisable = true;
+            grabInteractable = targetObject.AddComponent<XRGrabInteractable>();
         }
-        else
-        {
-            Debug.LogWarning("grabInteractable è null");
-        }
+        grabInteractable.enabled = true;
+        isEnable = true;
     }
 
     public override bool IsOperationComplete()
     {
-        return isDisable;
+        return isEnable;
     }
 }

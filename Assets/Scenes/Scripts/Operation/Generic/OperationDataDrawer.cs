@@ -84,7 +84,7 @@ public class OperationDataDrawer : PropertyDrawer
 
             case OperationType.OperationDisableXRGrab:
             case OperationType.OperationEnableXRGrab:
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), grabInteractable);
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), targetObject);
                 position.y += EditorGUIUtility.singleLineHeight + 2;
                 break;
 
