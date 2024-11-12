@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -116,3 +117,4 @@ public class OperationDataDrawer : PropertyDrawer
         return height;
     }
 }
+#endif

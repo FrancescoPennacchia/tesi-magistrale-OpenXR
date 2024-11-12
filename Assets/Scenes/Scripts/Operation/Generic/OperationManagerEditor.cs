@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -37,3 +38,4 @@ public class OperationManagerEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
