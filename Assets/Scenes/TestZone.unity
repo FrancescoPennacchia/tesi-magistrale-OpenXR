@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 337496600}
   - component: {fileID: 337496602}
   - component: {fileID: 337496601}
+  - component: {fileID: 337496603}
   m_Layer: 0
   m_Name: Socket
   m_TagString: Untagged
@@ -253,6 +254,66 @@ MonoBehaviour:
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingTargetFilter: {fileID: 1017029730}
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+  m_OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ShowInteractableHoverMeshes: 1
+  m_InteractableHoverMeshMaterial: {fileID: 0}
+  m_InteractableCantHoverMeshMaterial: {fileID: 0}
+  m_SocketActive: 1
+  m_InteractableHoverScale: 1
+  m_RecycleDelayTime: 1
+  m_HoverSocketSnapping: 0
+  m_SocketSnappingRadius: 0.1
+  m_SocketScaleMode: 0
+  m_FixedScale: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &337496603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337496599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f169f109fd8411d4fa5b1e2a1645bd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 0}
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_AttachTransform: {fileID: 0}
+  m_KeepSelectedTargetValid: 1
+  m_DisableVisualsWhenBlockedInGroup: 1
+  m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -291,6 +352,7 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+  allowedTag: NewTire
 --- !u!1 &351919399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6866935899790235709, guid: f036db49d802cc84fb58b4445b4b72ac,
@@ -651,7 +713,7 @@ GameObject:
   - component: {fileID: 649478740}
   m_Layer: 0
   m_Name: roue 2|jante|Dupli|2
-  m_TagString: Untagged
+  m_TagString: OldTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1057,9 +1119,10 @@ GameObject:
   - component: {fileID: 1017029729}
   - component: {fileID: 1017029728}
   - component: {fileID: 1017029727}
+  - component: {fileID: 1017029730}
   m_Layer: 0
   m_Name: Ruota da montare
-  m_TagString: Untagged
+  m_TagString: NewTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1281,6 +1344,54 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1017029730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017029725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51478d8f7e4167e40bacf38e835bb639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Evaluators:
+  - rid: 8085506448174612480
+  references:
+    version: 2
+    RefIds:
+    - rid: 8085506448174612480
+      type: {class: XRDistanceEvaluator, ns: UnityEngine.XR.Interaction.Toolkit.Filtering,
+        asm: Unity.XR.Interaction.Toolkit}
+      data:
+        m_Filter: {fileID: 1017029730}
+        m_Enabled: 1
+        m_Weight:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0.5
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_MaxDistance: 1
 --- !u!1 &1040587395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,7 +1405,7 @@ GameObject:
   - component: {fileID: 1040587397}
   m_Layer: 0
   m_Name: roue 2|pneu|Dupli|3
-  m_TagString: Untagged
+  m_TagString: NewTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1757,7 +1868,7 @@ GameObject:
   - component: {fileID: 1428378594}
   m_Layer: 0
   m_Name: roue 2|jante|Dupli|2
-  m_TagString: Untagged
+  m_TagString: NewTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1851,13 +1962,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530828936}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000009553193, y: -0.70710695, z: -0.70710665, w: 0.00000003231164}
-  m_LocalPosition: {x: -0.02512454, y: -0.034802783, z: -0.0636374}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -0.025, y: -0.035, z: -0.006}
   m_LocalScale: {x: 15.796411, y: 15.796414, z: 15.796413}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 337496600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!1 &1532680622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,7 +2190,7 @@ GameObject:
   - component: {fileID: 1837734880}
   m_Layer: 0
   m_Name: roue 2|pneu|Dupli|3
-  m_TagString: Untagged
+  m_TagString: OldTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2268,7 +2379,7 @@ GameObject:
   - component: {fileID: 1945051378}
   m_Layer: 0
   m_Name: Ruota Da Rimuovere
-  m_TagString: Untagged
+  m_TagString: OldTire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

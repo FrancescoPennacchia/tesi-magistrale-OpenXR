@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Chiave
   - chiave
+  - OldTire
+  - NewTire
+  - Bolt
   layers:
   - Default
   - TransparentFX
