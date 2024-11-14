@@ -2,47 +2,77 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Filtering;
 
-public class TagSelectFilter : XRSocketInteractor
+public class TagSocketFilter : XRSocketInteractor
 {
-    [Tooltip("Il tag degli oggetti che questo filtro permetterà.")]
-    public string allowedTag;
+    public string[] tagsToAccept; // Lista dei tag accettati
 
-    // Verifica se l'interactible può essere hoverato (usando il tag specificato)
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && MatchUsingTag(interactable);
-    }
+        // Verifica le condizioni base
+        if (!base.CanHover(interactable))
+            return false;
 
-    // Verifica se l'interactible può essere selezionato (usando il tag specificato)
-    public override bool CanSelect(IXRSelectInteractable interactable)
-    {
-        return base.CanSelect(interactable) && MatchUsingTag(interactable);
-    }
+        // Ottieni il GameObject dall'interfaccia IXRHoverInteractable
+        GameObject interactableObject = null;
 
-    // Controlla se l'oggetto interagibile ha il tag specificato
-    private bool MatchUsingTag(object interactable)
-    {
-        // Ottieni il GameObject associato e verifica il tag
-        if (interactable is IXRInteractable interactableObj)
+        // Metodo 1: Usando transform (se disponibile)
+        if (interactable.transform != null)
         {
-            return interactableObj.transform.CompareTag(allowedTag);
+            interactableObject = interactable.transform.gameObject;
         }
+        else
+        {
+            // Metodo 2: Cast a MonoBehaviour
+            interactableObject = (interactable as MonoBehaviour)?.gameObject;
+        }
+
+        // Verifica che il GameObject sia valido
+        if (interactableObject == null)
+            return false;
+
+        // Controlla se l'interactable ha uno dei tag accettati
+        foreach (string tag in tagsToAccept)
+        {
+            if (interactableObject.CompareTag(tag))
+                return true;
+        }
+
+        // Se nessun tag corrisponde, ritorna false
         return false;
     }
 
-    /*
-    public bool CanSelect(IXRSelectInteractor interactor, IXRSelectInteractable interactable)
+    public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        // Controlla se l'oggetto interagibile ha il tag specificato
-        return interactable.transform.CompareTag(allowedTag);
-    }
+        // Verifica le condizioni base
+        if (!base.CanSelect(interactable))
+            return false;
 
-    public bool Process(IXRSelectInteractor interactor, IXRSelectInteractable interactable)
-    {
-        bool result = interactable.transform.CompareTag(allowedTag);
-        Debug.Log($"TagSelectFilter: Interagibile '{interactable.transform.name}' con tag '{interactable.transform.tag}' - Risultato: {result}");
-        return CanSelect(interactor, interactable);
-    }
+        // Ottieni il GameObject dall'interfaccia IXRSelectInteractable
+        GameObject interactableObject = null;
 
-    public bool canProcess => true;*/
+        // Metodo 1: Usando transform (se disponibile)
+        if (interactable.transform != null)
+        {
+            interactableObject = interactable.transform.gameObject;
+        }
+        else
+        {
+            // Metodo 2: Cast a MonoBehaviour
+            interactableObject = (interactable as MonoBehaviour)?.gameObject;
+        }
+
+        // Verifica che il GameObject sia valido
+        if (interactableObject == null)
+            return false;
+
+        // Controlla se l'interactable ha uno dei tag accettati
+        foreach (string tag in tagsToAccept)
+        {
+            if (interactableObject.CompareTag(tag))
+                return true;
+        }
+
+        // Se nessun tag corrisponde, ritorna false
+        return false;
+    }
 }
