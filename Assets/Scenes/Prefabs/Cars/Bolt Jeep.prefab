@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8000116182912057796}
   - component: {fileID: 3377607230519668638}
   - component: {fileID: 2506749295985060680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276594329386536507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bolt Jeep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1402653964500673354}
   - component: {fileID: 8841615765624182684}
   - component: {fileID: 645698375266746252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: roue 2|ecrou|Dupli|1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804906283404870445}
   - component: {fileID: 4379292937621759615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,8 +301,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019768436, y: 0.019601941, z: 0.012462743}
-  m_Center: {x: -0.00008672206, y: -0.00015515399, z: 0.0023241374}
+  m_Size: {x: 0.019768436, y: 0.019601945, z: 0.02258124}
+  m_Center: {x: -0.00008672251, y: -0.00015515364, z: 0.0047857957}
 --- !u!1 &6866935899790235709
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3754785811388669241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Luce
   m_TagString: Untagged
   m_Icon: {fileID: 0}

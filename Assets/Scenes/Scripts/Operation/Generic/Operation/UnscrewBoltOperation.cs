@@ -147,6 +147,7 @@ public class UnscrewBoltOperation : BaseOperation
         Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
         boltRigidbody.isKinematic = false;
         boltRigidbody.useGravity = true;
+        
 
         Collider boltCollider = bolt.GetComponent<Collider>();
         boltCollider.isTrigger = false;
