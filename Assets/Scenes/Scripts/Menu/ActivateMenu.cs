@@ -1,27 +1,27 @@
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.InputSystem;
 
-public class ActivateMenu : MonoBehaviour
+public class MenuToggle : MonoBehaviour
 {
-    public GameObject menu;
+    [SerializeField] private GameObject menu; // Assegna il menu da disattivare/attivare
+    [SerializeField] private InputActionReference toggleMenuLeft;  // Input per il pulsante Y
+    [SerializeField] private InputActionReference toggleMenuRight; // Input per il pulsante B
 
-    public void Update()
+    private void OnEnable()
     {
-        if (IsButtonPressed(XRNode.RightHand, CommonUsages.secondaryButton) 
-            || IsButtonPressed(XRNode.LeftHand, CommonUsages.secondaryButton))
-        {
-            menu.SetActive(!menu.activeSelf);
-        }
+        toggleMenuLeft.action.performed += ToggleMenu;
+        toggleMenuRight.action.performed += ToggleMenu;
     }
 
-    private bool IsButtonPressed(XRNode hand, InputFeatureUsage<bool> button)
+    private void OnDisable()
     {
-        InputDevice device = InputDevices.GetDeviceAtXRNode(hand);
-        bool isPressed = false;
-        if (device.TryGetFeatureValue(button, out isPressed) && isPressed)
-        {
-            return true;
-        }
-        return false;
+        toggleMenuLeft.action.performed -= ToggleMenu;
+        toggleMenuRight.action.performed -= ToggleMenu;
+    }
+
+    private void ToggleMenu(InputAction.CallbackContext context)
+    {
+        // Cambia lo stato del menu (attivo/disattivo)
+        menu.SetActive(!menu.activeSelf);
     }
 }

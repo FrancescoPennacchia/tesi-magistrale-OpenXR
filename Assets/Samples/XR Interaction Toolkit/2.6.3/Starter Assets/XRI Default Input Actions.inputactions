@@ -790,6 +790,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Activate Menu",
+                    "type": "Button",
+                    "id": "75b8c487-d133-4aaa-b8f0-cb8988870496",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -966,6 +975,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b3c1072-8192-4bd6-a922-c22648f92657",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Value",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1a7faf3-d0a2-4022-a717-d8acb8ff8bb2",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1617,6 +1648,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Activate Menu",
+                    "type": "Button",
+                    "id": "69cc9d49-1849-43b3-bbd7-ed97913037b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1635,6 +1675,17 @@
                     "name": "",
                     "id": "1d5b47ea-64e3-4b99-b620-de6c360908be",
                     "path": "<MetaAimHand>{RightHand}/indexPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d23fb8f2-6a0a-4449-bb11-b9da1c7b90f3",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -1782,6 +1833,17 @@
                     "processors": "ScaleVector2(x=0),StickDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "Scale Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0dacf21c-8898-46e1-8587-13d409559a55",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
