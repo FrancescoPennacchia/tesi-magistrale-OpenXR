@@ -9,8 +9,8 @@ public class ScrewBoltOperation : BaseOperation
     public Asse directionBolt;         // La direzione di sollevamento del bullone
     private float totalRotation = 0f;
     private float requiredRotation = 120;    // Rotazione necessaria per avvitare il bullone
-    private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
-    private float liftAmount = 0.1f;          // Quantità di abbassamento per ogni passo di rotazione
+    //private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
+    //private float liftAmount = 0.1f;          // Quantità di abbassamento per ogni passo di rotazione
     private float rotationSpeed = 50f;        // Velocità di rotazione in gradi per secondo
     private float liftSpeed = 0.01f;          // Velocità di abbassamento per secondo
 
@@ -28,9 +28,23 @@ public class ScrewBoltOperation : BaseOperation
             return;
         }
 
+        XRGrabInteractable grabInteractable = bolt.GetComponent<XRGrabInteractable>();
+        if(grabInteractable != null && grabInteractable.isActiveAndEnabled)
+        {
+            grabInteractable.enabled = false;
+        }
+
         // Aggiungi dinamicamente il BoltTriggerHandler al bullone
         BoltTriggerHandler triggerHandler = bolt.AddComponent<BoltTriggerHandler>();
         triggerHandler.screwBoltOperation = this;
+
+        Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
+        if(boltRigidbody != null)
+        {
+            boltRigidbody.isKinematic = true;
+            boltRigidbody.useGravity = false;
+            Debug.Log("Rigidbody aggiunto al bullone.");
+        }
 
         // Assicura che il bullone abbia un Collider con Is Trigger attivato
         Collider boltCollider = bolt.GetComponent<Collider>();
@@ -106,7 +120,7 @@ public class ScrewBoltOperation : BaseOperation
         // Controlla se l'oggetto entrante ha il tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            isWrenchInCollider = true;
+            //isWrenchInCollider = true;
             shouldRotateAndLift = true;
             Debug.Log("Chiave nel collider del bullone.");
         }
@@ -117,7 +131,7 @@ public class ScrewBoltOperation : BaseOperation
         // Controlla se l'oggetto uscente ha il tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            isWrenchInCollider = false;
+            //isWrenchInCollider = false;
             shouldRotateAndLift = false;
             Debug.Log("Chiave fuori dal collider del bullone.");
         }

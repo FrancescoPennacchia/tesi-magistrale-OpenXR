@@ -9,8 +9,8 @@ public class UnscrewBoltOperation : BaseOperation
     private bool isUnscrewed = false;
     private float totalRotation = 0f;
     private float requiredRotation = 300f;    // Rotazione necessaria per svitare il bullone
-    private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
-    private float liftAmount = 0.1f;          // Quantità di sollevamento per ogni passo di rotazione
+    //private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
+    //private float liftAmount = 0.1f;          // Quantità di sollevamento per ogni passo di rotazione
     private float rotationSpeed = 50f;        // Velocità di rotazione in gradi per secondo
     private float liftSpeed = 0.01f;          // Velocità di sollevamento per secondo
 
@@ -103,7 +103,7 @@ public class UnscrewBoltOperation : BaseOperation
         // Controlla se l'oggetto entrante ha il tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            isWrenchInCollider = true;
+            //isWrenchInCollider = true;
             shouldRotateAndLift = true;
             Debug.Log("Chiave nel collider del bullone.");
         }
@@ -114,7 +114,7 @@ public class UnscrewBoltOperation : BaseOperation
         // Controlla se l'oggetto uscente ha il tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            isWrenchInCollider = false;
+            //isWrenchInCollider = false;
             shouldRotateAndLift = false;
             Debug.Log("Chiave fuori dal collider del bullone.");
         }
