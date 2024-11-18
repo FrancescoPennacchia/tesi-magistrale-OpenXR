@@ -22,6 +22,18 @@ public class AttachObjectOperation : BaseOperation
             return;
         }
 
+
+        if (!socketInteractor.isActiveAndEnabled)
+        {
+            if (!socketInteractor.gameObject.activeSelf)
+            {
+                socketInteractor.gameObject.SetActive(true);
+                Debug.Log("Attivo il GameObject del Socket Interactor: " + socketInteractor.gameObject.name);
+            }
+            socketInteractor.enabled = true;
+            Debug.Log("Attivo il Socket Interactor: " + socketInteractor);
+        }
+
         // Abilita l'interazione con l'oggetto target
         var interactable = targetObject.GetComponent<XRGrabInteractable>();
         if (interactable != null)
@@ -34,12 +46,19 @@ public class AttachObjectOperation : BaseOperation
             Debug.LogError("XRGrabInteractable non trovato su " + targetObject.name);
         }
 
+        BoxCollider boxCollider = socketInteractor.gameObject.GetComponent<BoxCollider>();
+        if(boxCollider != null)
+        {
+            boxCollider.enabled = true;
+        }
+   
+
         // Aggiungi listener all'evento selectEntered del socketInteractor
         socketInteractor.selectEntered.AddListener(OnObjectAttached);
         Debug.Log("Listener aggiunto al socketInteractor " + socketInteractor.name);
 
         // Opzionale: Disabilita il XRGrabInteractable sul socketInteractor per impedire la rimozione
-        // socketInteractor.allowSelect = false;
+        //socketInteractor.allowSelect = false;
     }
 
     public override bool IsOperationComplete()
@@ -55,8 +74,6 @@ public class AttachObjectOperation : BaseOperation
         // Verifica se l'oggetto inserito è quello target
         if (attachedObject == targetObject)
         {
-            isCompleted = true;
-            Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket.");
 
             // Disabilita ulteriori interazioni
             var interactable = targetObject.GetComponent<XRGrabInteractable>();
@@ -72,10 +89,29 @@ public class AttachObjectOperation : BaseOperation
             {
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
-                //rigidbody.velocity = Vector3.zero;
-                //rigidbody.angularVelocity = Vector3.zero;
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
                 Debug.Log("Rigidbody configurato per " + targetObject.name);
             }
+            else
+            {
+                Debug.LogWarning("Rigidbody non trovato su " + targetObject.name);
+            }
+
+
+
+            Collider Collider = targetObject.GetComponent<Collider>();
+            if(Collider != null)
+            {
+                Collider.enabled = false;
+                Debug.Log("Collider impostato su IsTrigger per " + targetObject.name);
+            } else
+            {
+                Debug.LogWarning("Collider non trovato su " + targetObject.name);
+            }
+
+
+
 
             // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
             Transform attachTransform = socketInteractor.attachTransform != null ? socketInteractor.attachTransform : socketInteractor.transform;
@@ -90,20 +126,14 @@ public class AttachObjectOperation : BaseOperation
             socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
             Debug.Log("Listener rimosso dal socketInteractor " + socketInteractor.name);
 
-            // Eventuali azioni post-completamento
+       
+
+            isCompleted = true;
+            Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket.");
         }
         else
         {
             Debug.LogWarning("L'oggetto inserito non è quello previsto.");
-        }
-    }
-
-    private void OnDestroy()
-    {
-        // Rimuovi il listener per evitare problemi
-        if (socketInteractor != null)
-        {
-            socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
         }
     }
 }

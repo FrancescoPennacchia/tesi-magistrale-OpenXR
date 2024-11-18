@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54932121}
   - component: {fileID: 54932122}
+  - component: {fileID: 54932123}
   m_Layer: 7
   m_Name: Bolt 2 socket
   m_TagString: Untagged
@@ -216,6 +217,27 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!65 &54932123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54932120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1266237, y: 0.13389796, z: 0.1181316}
+  m_Center: {x: -0.026768453, y: -0.037480135, z: 0.00754919}
 --- !u!1 &198367630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736310751}
   - component: {fileID: 736310752}
+  - component: {fileID: 736310753}
   m_Layer: 7
   m_Name: Bolt 1 socket
   m_TagString: Untagged
@@ -1572,6 +1595,27 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!65 &736310753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736310750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1266237, y: 0.13389796, z: 0.1181316}
+  m_Center: {x: -0.026768453, y: -0.037480135, z: 0.00754919}
 --- !u!1 &767352870 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6678421741896259184, guid: dedcff29f1c0fb640bc2632f2c0b4266,
@@ -1814,6 +1858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802408478}
   - component: {fileID: 802408479}
+  - component: {fileID: 802408480}
   m_Layer: 7
   m_Name: Bolt 3 socket
   m_TagString: Untagged
@@ -1898,6 +1943,27 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!65 &802408480
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802408477}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1266237, y: 0.13389796, z: 0.1181316}
+  m_Center: {x: -0.026768453, y: -0.037480135, z: 0.00754919}
 --- !u!1 &853837817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,15 +2041,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   operationsData:
-  - operationType: 1
-    instructionMessage: Rimuovere il bullone utilizzando lo svita bulloni.
-    targetObject: {fileID: 513599507}
-    socketInteractor: {fileID: 0}
-    indicatorEnabled: 0
-    indicatorPrefab: {fileID: 0}
-    grabInteractable: {fileID: 0}
-    rotationBolt: 4
-    directionBolt: 4
   - operationType: 8
     instructionMessage: 
     targetObject: {fileID: 0}
@@ -2193,7 +2250,16 @@ MonoBehaviour:
     directionBolt: 4
   - operationType: 0
     instructionMessage: Inserire il bullone, vedergli gli indicatori blu.
-    targetObject: {fileID: 1425649799}
+    targetObject: {fileID: 1352133581}
+    socketInteractor: {fileID: 736310752}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 633152818}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 2
+    instructionMessage: Avvitare il bullone.
+    targetObject: {fileID: 1352133581}
     socketInteractor: {fileID: 736310752}
     indicatorEnabled: 0
     indicatorPrefab: {fileID: 633152818}
@@ -2378,16 +2444,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017029725}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604638, y: 0.000000054424476, z: -0.000000021073445,
-    w: 1}
-  m_LocalPosition: {x: -0.78500044, y: 0, z: 0.20900008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.888, y: -0.052, z: -0.004}
+  m_LocalScale: {x: 0.999222, y: 1.0422152, z: 0.9601907}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1428378593}
   - {fileID: 1040587396}
   m_Father: {fileID: 198367631}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!65 &1017029727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2407,8 +2472,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.50244886, y: 0.5137188, z: 0.16004807}
-  m_Center: {x: -0.02087756, y: -0.03719224, z: -0.08669391}
+  m_Size: {x: 0.43847036, y: 0.43745878, z: 0.16004807}
+  m_Center: {x: -0.020196201, y: -0.038543787, z: -0.08669316}
 --- !u!114 &1017029728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2745,7 +2810,7 @@ Transform:
   m_GameObject: {fileID: 1045682260}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000030848486, y: 0.046574734, z: 0.000000054859537, w: -0.99891484}
-  m_LocalPosition: {x: 0.016696682, y: -0.047845006, z: 0.00620071}
+  m_LocalPosition: {x: 0.0123, y: -0.0505, z: 0.0039}
   m_LocalScale: {x: 0.014235849, y: 0.01423585, z: 0.02023585}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3841,12 +3906,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1425649797}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1425649799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 620786185551778945, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1425649797}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1428378592
 GameObject:
   m_ObjectHideFlags: 0
@@ -3991,9 +4050,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530828936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: -0.025, y: -0.035, z: -0.006}
-  m_LocalScale: {x: 15.796411, y: 15.796414, z: 15.796413}
+  m_LocalRotation: {x: 2.6148566e-14, y: -0.00000011920927, z: -1, w: -0.00000005999888}
+  m_LocalPosition: {x: -0.038000017, y: -0.05200001, z: -0.0040000384}
+  m_LocalScale: {x: 0.999222, y: 1.0422152, z: 0.9601907}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 337496600}
@@ -4008,6 +4067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532104170}
   - component: {fileID: 1532104171}
+  - component: {fileID: 1532104172}
   m_Layer: 7
   m_Name: Bolt 4 socket
   m_TagString: Untagged
@@ -4092,6 +4152,27 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!65 &1532104172
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532104169}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1266237, y: 0.13389796, z: 0.1181316}
+  m_Center: {x: -0.026768453, y: -0.037480135, z: 0.00754919}
 --- !u!1 &1532680622
 GameObject:
   m_ObjectHideFlags: 0
@@ -4670,6 +4751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1821332908}
   - component: {fileID: 1821332909}
+  - component: {fileID: 1821332910}
   m_Layer: 7
   m_Name: Bolt 5 socket
   m_TagString: Untagged
@@ -4754,6 +4836,27 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!65 &1821332910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821332907}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1266237, y: 0.13389796, z: 0.1181316}
+  m_Center: {x: -0.026768453, y: -0.037480135, z: 0.00754919}
 --- !u!1 &1837734878
 GameObject:
   m_ObjectHideFlags: 0
