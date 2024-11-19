@@ -8,7 +8,7 @@ public class ScrewBoltOperation : BaseOperation
     public Asse rotationBolt;          // L'asse di rotazione del bullone
     public Asse directionBolt;         // La direzione di sollevamento del bullone
     private float totalRotation = 0f;
-    private float requiredRotation = 120;    // Rotazione necessaria per avvitare il bullone
+    private float requiredRotation = 300f;    // Rotazione necessaria per avvitare il bullone
     //private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
     //private float liftAmount = 0.1f;          // Quantità di abbassamento per ogni passo di rotazione
     private float rotationSpeed = 50f;        // Velocità di rotazione in gradi per secondo
@@ -52,6 +52,11 @@ public class ScrewBoltOperation : BaseOperation
         {
             Debug.LogError("Il bullone non ha un Collider.");
             return;
+        }
+
+        if(!boltCollider.enabled)
+        {
+            boltCollider.enabled = true;
         }
 
         if (!boltCollider.isTrigger)
