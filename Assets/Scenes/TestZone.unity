@@ -1521,15 +1521,6 @@ MonoBehaviour:
     grabInteractable: {fileID: 0}
     rotationBolt: 4
     directionBolt: 4
-  - operationType: 2
-    instructionMessage: Avvita
-    targetObject: {fileID: 513599507}
-    socketInteractor: {fileID: 2111274127}
-    indicatorEnabled: 0
-    indicatorPrefab: {fileID: 0}
-    grabInteractable: {fileID: 0}
-    rotationBolt: 4
-    directionBolt: 5
   instructionText: {fileID: 1067362846}
 --- !u!4 &678374947
 Transform:
@@ -1942,7 +1933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &871163218
 Transform:
   m_ObjectHideFlags: 0
