@@ -11,7 +11,7 @@ public class UnscrewBoltOperation : BaseOperation
     private float requiredRotation = 300f;    // Rotazione necessaria per svitare il bullone
     //private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
     //private float liftAmount = 0.1f;          // Quantità di sollevamento per ogni passo di rotazione
-    private float rotationSpeed = 50f;        // Velocità di rotazione in gradi per secondo
+    private float rotationSpeed = 200f;        // Velocità di rotazione in gradi per secondo
     private float liftSpeed = 0.01f;          // Velocità di sollevamento per secondo
 
     private bool shouldRotateAndLift = false; // Flag per controllare la rotazione e il sollevamento

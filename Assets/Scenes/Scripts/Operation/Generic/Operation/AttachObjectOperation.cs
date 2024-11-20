@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -51,6 +52,7 @@ public class AttachObjectOperation : BaseOperation
         {
             boxCollider.enabled = true;
         }
+
    
 
         // Aggiungi listener all'evento selectEntered del socketInteractor
@@ -66,6 +68,8 @@ public class AttachObjectOperation : BaseOperation
         return isCompleted;
     }
 
+
+
     private void OnObjectAttached(SelectEnterEventArgs args)
     {
         GameObject attachedObject = args.interactableObject.transform.gameObject;
@@ -74,7 +78,16 @@ public class AttachObjectOperation : BaseOperation
         // Verifica se l'oggetto inserito è quello target
         if (attachedObject == targetObject)
         {
+            
+            // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
+            Transform attachTransform = socketInteractor.attachTransform != null ? socketInteractor.attachTransform : socketInteractor.transform;
+      
+            targetObject.transform.SetParent(socketInteractor.transform, false);
+            targetObject.transform.localPosition = attachTransform.localPosition;
+            targetObject.transform.localRotation = attachTransform.localRotation;
+    
 
+            
             // Disabilita ulteriori interazioni
             var interactable = targetObject.GetComponent<XRGrabInteractable>();
             if (interactable != null)
@@ -89,8 +102,7 @@ public class AttachObjectOperation : BaseOperation
             {
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
-                rigidbody.velocity = Vector3.zero;
-                rigidbody.angularVelocity = Vector3.zero;
+                rigidbody.detectCollisions = false;
                 Debug.Log("Rigidbody configurato per " + targetObject.name);
             }
             else
@@ -99,11 +111,11 @@ public class AttachObjectOperation : BaseOperation
             }
 
 
-
+            
             Collider Collider = targetObject.GetComponent<Collider>();
             if(Collider != null)
             {
-                Collider.enabled = false;
+                Collider.isTrigger = true;
                 Debug.Log("Collider impostato su IsTrigger per " + targetObject.name);
             } else
             {
@@ -111,22 +123,29 @@ public class AttachObjectOperation : BaseOperation
             }
 
 
-
-
-            // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
-            Transform attachTransform = socketInteractor.attachTransform != null ? socketInteractor.attachTransform : socketInteractor.transform;
-            targetObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
-            Debug.Log("Posizione e rotazione di " + targetObject.name + " allineate al socket.");
-
+            
             // Genitorizza l'oggetto al socket interactor
-            targetObject.transform.SetParent(socketInteractor.transform, true);
-            Debug.Log(targetObject.name + " genitorizzato al socketInteractor.");
+            //targetObject.transform.SetParent(socketInteractor.transform, true);
+            //Debug.Log(targetObject.name + " genitorizzato al socketInteractor.");
+            socketInteractor.enabled = false;
 
             // Rimuovi listener
             socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
             Debug.Log("Listener rimosso dal socketInteractor " + socketInteractor.name);
 
-       
+
+            // Disabilita il socket interactor
+            /*
+            socketInteractor.enabled = false;
+            socketInteractor.gameObject.SetActive(false);
+            BoxCollider box = socketInteractor.gameObject.GetComponent<BoxCollider>();
+            if (box != null)
+            {
+                box.enabled = false;
+               Debug.Log("Socket disabilitato correttamente.");
+            }
+           
+            */
 
             isCompleted = true;
             Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket.");
