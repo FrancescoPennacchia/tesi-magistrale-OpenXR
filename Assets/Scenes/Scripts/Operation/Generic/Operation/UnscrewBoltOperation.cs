@@ -1,95 +1,81 @@
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class UnscrewBoltOperation : BaseOperation
 {
-    public GameObject bolt;              // Il bullone da svitare
-    public Asse rotationBolt;          // L'asse di rotazione del bullone
-    public Asse directionBolt;         // La direzione di sollevamento del bullone
+    public GameObject bolt;            // The bolt to unscrew
+    public Asse rotationBolt;          // Axis of rotation
+    public Asse directionBolt;         // Direction of lifting
     private bool isUnscrewed = false;
     private float totalRotation = 0f;
-    private float requiredRotation = 300f;    // Rotazione necessaria per svitare il bullone
-    //private bool isWrenchInCollider = false;  // Verifica se la chiave è nel collider del bullone
-    //private float liftAmount = 0.1f;          // Quantità di sollevamento per ogni passo di rotazione
-    private float rotationSpeed = 200f;        // Velocità di rotazione in gradi per secondo
-    private float liftSpeed = 0.01f;          // Velocità di sollevamento per secondo
+    private float requiredRotation = 300f;    // Rotation needed to unscrew
+    private float rotationSpeed = 200f;       // Rotation speed in degrees per second
+    private float liftSpeed = 0.01f;          // Lifting speed per second
 
-    private bool shouldRotateAndLift = false; // Flag per controllare la rotazione e il sollevamento
+    private bool shouldRotateAndLift = false; // Flag to control rotation and lifting
 
     private Vector3 rotationAxis;
     private Vector3 liftDirection;
+
+    // Store initial position and rotation
+    private Vector3 initialBoltPosition;
+    private Quaternion initialBoltRotation;
 
     public override void StartOperation()
     {
         if (bolt == null)
         {
-            Debug.LogError("Bolt non assegnato in UnscrewBoltOperation.");
+            Debug.LogError("Bolt not assigned in UnscrewBoltOperation.");
             return;
         }
 
-        // Aggiungi dinamicamente il BoltTriggerHandler al bullone
-        BoltTriggerHandler triggerHandler = bolt.AddComponent<BoltTriggerHandler>();
+        // Store the initial position and rotation
+        initialBoltPosition = bolt.transform.position;
+        initialBoltRotation = bolt.transform.rotation;
+
+        // Reset bolt's position and rotation
+        bolt.transform.position = initialBoltPosition;
+        bolt.transform.rotation = initialBoltRotation;
+
+        // Set up BoltTriggerHandler
+        BoltTriggerHandler triggerHandler = bolt.GetComponent<BoltTriggerHandler>();
+        if (triggerHandler == null)
+        {
+            triggerHandler = bolt.AddComponent<BoltTriggerHandler>();
+        }
         triggerHandler.unscrewBoltOperation = this;
+        triggerHandler.screwBoltOperation = null;
 
-        // Assicura che il bullone abbia un Collider con Is Trigger attivato
+        // Reset Collider settings
         Collider boltCollider = bolt.GetComponent<Collider>();
-        if (boltCollider == null)
+        if (boltCollider != null)
         {
-            Debug.LogError("Il bullone non ha un Collider.");
-            return;
-        }
-
-        if (!boltCollider.isTrigger)
-        {
+            boltCollider.enabled = true;
             boltCollider.isTrigger = true;
-            Debug.Log("Impostato IsTrigger su true per il Collider del bullone.");
         }
 
-        switch (rotationBolt)
+        // Reset Rigidbody settings
+        Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
+        if (boltRigidbody != null)
         {
-            case Asse.XRight:
-                rotationAxis = Vector3.right;
-                break;
-            case Asse.XLeft:
-                rotationAxis = Vector3.left;
-                break;
-            case Asse.YUp:
-                rotationAxis = Vector3.up;
-                break;
-            case Asse.YDown:
-                rotationAxis = Vector3.down;
-                break;
-            case Asse.ZForward:
-                rotationAxis = Vector3.forward;
-                break;
-            case Asse.ZBack:
-                rotationAxis = Vector3.back;
-                break;
+            boltRigidbody.isKinematic = true;
+            boltRigidbody.useGravity = false;
+            boltRigidbody.constraints = RigidbodyConstraints.None;
         }
 
-        // Imposta la direzione di sollevamento
-        switch (directionBolt)
+        // Disable XR Grab Interactable
+        XRGrabInteractable grabInteractable = bolt.GetComponent<XRGrabInteractable>();
+        if (grabInteractable != null)
         {
-            case Asse.XRight:
-                liftDirection = Vector3.right;
-                break;
-            case Asse.XLeft:
-                liftDirection = Vector3.left;
-                break;
-            case Asse.YUp:
-                liftDirection = Vector3.up;
-                break;
-            case Asse.YDown:
-                liftDirection = Vector3.down;
-                break;
-            case Asse.ZForward:
-                liftDirection = Vector3.forward;
-                break;
-            case Asse.ZBack:
-                liftDirection = Vector3.back;
-                break;
+            grabInteractable.enabled = false;
         }
 
+        // Configure rotation and lift axes
+        rotationAxis = GetAxis(rotationBolt);
+        liftDirection = GetAxis(directionBolt);
+
+        // Reset rotation tracker
+        totalRotation = 0f;
     }
 
     public override bool IsOperationComplete()
@@ -99,24 +85,22 @@ public class UnscrewBoltOperation : BaseOperation
 
     public void HandleTriggerEnter(Collider other)
     {
-        Debug.Log("Oggetto entrato nel trigger del bullone: " + other.gameObject.name);
-        // Controlla se l'oggetto entrante ha il tag "chiave"
+        Debug.Log("Object entered bolt trigger: " + other.gameObject.name);
+        // Check if the entering object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            //isWrenchInCollider = true;
             shouldRotateAndLift = true;
-            Debug.Log("Chiave nel collider del bullone.");
+            Debug.Log("Key entered bolt collider.");
         }
     }
 
     public void HandleTriggerExit(Collider other)
     {
-        // Controlla se l'oggetto uscente ha il tag "chiave"
+        // Check if the exiting object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
-            //isWrenchInCollider = false;
             shouldRotateAndLift = false;
-            Debug.Log("Chiave fuori dal collider del bullone.");
+            Debug.Log("Key exited bolt collider.");
         }
     }
 
@@ -124,14 +108,14 @@ public class UnscrewBoltOperation : BaseOperation
     {
         if (shouldRotateAndLift && totalRotation < requiredRotation)
         {
-            float rotationStep = rotationSpeed * Time.deltaTime; // Calcola la rotazione per frame
-            float liftStep = liftSpeed * Time.deltaTime;         // Calcola il sollevamento per frame
+            float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
+            float liftStep = liftSpeed * Time.deltaTime;         // Lifting per frame
 
-            bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotazione lungo l'asse specificato
-            bolt.transform.Translate(liftDirection * liftStep, Space.Self); // Solleva il bullone lungo l'asse specificato
+            bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotate bolt
+            bolt.transform.Translate(liftDirection * liftStep, Space.Self); // Lift bolt
             totalRotation += rotationStep;
 
-            // Controlla se la rotazione ha raggiunto la soglia richiesta
+            // Check if required rotation is achieved
             if (totalRotation >= requiredRotation)
             {
                 isUnscrewed = true;
@@ -142,23 +126,54 @@ public class UnscrewBoltOperation : BaseOperation
 
     private void OnOperationComplete()
     {
-        // Disabilita il bullone
-        //bolt.SetActive(false);
+        // Reset BoltTriggerHandler references
+        BoltTriggerHandler triggerHandler = bolt.GetComponent<BoltTriggerHandler>();
+        if (triggerHandler != null)
+        {
+            triggerHandler.unscrewBoltOperation = null;
+            triggerHandler.screwBoltOperation = null;
+        }
+
+        // Enable Rigidbody physics
         Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
-        boltRigidbody.isKinematic = false;
-        boltRigidbody.useGravity = true;
-        
+        if (boltRigidbody != null)
+        {
+            boltRigidbody.isKinematic = false;
+            boltRigidbody.useGravity = true;
+            // Optionally constrain movement if needed
+            // boltRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
 
+        // Disable trigger on collider
         Collider boltCollider = bolt.GetComponent<Collider>();
-        boltCollider.isTrigger = false;
+        if (boltCollider != null)
+        {
+            boltCollider.isTrigger = false;
+        }
 
-
+        // Enable XR Grab Interactable
         XRGrabInteractable grabInteractable = bolt.GetComponent<XRGrabInteractable>();
         if (grabInteractable == null)
         {
             grabInteractable = bolt.AddComponent<XRGrabInteractable>();
         }
         grabInteractable.enabled = true;
-        Debug.Log("Bullone svitato con successo!");
+
+        Debug.Log("Bolt unscrewed successfully!");
+    }
+
+    // Helper method to get the axis vector based on Asse enum
+    private Vector3 GetAxis(Asse axis)
+    {
+        switch (axis)
+        {
+            case Asse.XRight: return Vector3.right;
+            case Asse.XLeft: return Vector3.left;
+            case Asse.YUp: return Vector3.up;
+            case Asse.YDown: return Vector3.down;
+            case Asse.ZForward: return Vector3.forward;
+            case Asse.ZBack: return Vector3.back;
+            default: return Vector3.up;
+        }
     }
 }

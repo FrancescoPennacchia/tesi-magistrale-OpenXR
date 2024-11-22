@@ -85,9 +85,10 @@ public class AttachObjectOperation : BaseOperation
             targetObject.transform.SetParent(socketInteractor.transform, false);
             targetObject.transform.localPosition = attachTransform.localPosition;
             targetObject.transform.localRotation = attachTransform.localRotation;
-    
+            targetObject.transform.localScale = attachTransform.localScale;
 
-            
+
+
             // Disabilita ulteriori interazioni
             var interactable = targetObject.GetComponent<XRGrabInteractable>();
             if (interactable != null)

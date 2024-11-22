@@ -21,12 +21,11 @@ public class BoltTriggerHandler : MonoBehaviour
     {
         if (unscrewBoltOperation != null && !unscrewBoltOperation.IsOperationComplete())
         {
-            unscrewBoltOperation.HandleTriggerExit(other);
+           unscrewBoltOperation.HandleTriggerExit(other);
         }
         else if (screwBoltOperation != null && !screwBoltOperation.IsOperationComplete())
         {
-            screwBoltOperation.HandleTriggerExit(other);
+           screwBoltOperation.HandleTriggerExit(other);
         }
     }
 }
-

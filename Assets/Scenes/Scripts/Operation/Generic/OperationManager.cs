@@ -129,7 +129,7 @@ public class OperationManager : MonoBehaviour
                 indicator.DestroyArrow(); // Distrugge la freccia e rimuove il componente
             }
 
-            Destroy(currentOperation.gameObject); // Distrugge l'operationObject intero
+            //Destroy(currentOperation.gameObject); // Distrugge l'operationObject intero
             currentOperation = null;
             currentOperationIndex++;
             StartNextOperation();
