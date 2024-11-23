@@ -60,6 +60,7 @@ public class ScrewBoltOperation : BaseOperation
         {
             boltRigidbody.isKinematic = true;
             boltRigidbody.useGravity = false;
+            boltRigidbody.detectCollisions = true;
             boltRigidbody.constraints = RigidbodyConstraints.None;
         }
 
@@ -140,10 +141,8 @@ public class ScrewBoltOperation : BaseOperation
         Rigidbody boltRigidbody = bolt.GetComponent<Rigidbody>();
         if (boltRigidbody != null)
         {
-            boltRigidbody.isKinematic = false;
-            boltRigidbody.useGravity = true;
             // Optionally constrain movement if needed
-            // boltRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            boltRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         // Disable trigger on collider
@@ -157,7 +156,7 @@ public class ScrewBoltOperation : BaseOperation
         XRGrabInteractable grabInteractable = bolt.GetComponent<XRGrabInteractable>();
         if (grabInteractable != null)
         {
-            grabInteractable.enabled = true;
+            grabInteractable.enabled = false;
         }
 
         Debug.Log("Bolt screwed successfully!");

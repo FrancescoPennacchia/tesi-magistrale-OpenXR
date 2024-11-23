@@ -1148,7 +1148,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3477750562127403229, guid: e88b381eca1532b40a9ba9ec44e3cdcc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2568579920868748519, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
@@ -1452,7 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   operationsData:
-  - operationType: 2
+  - operationType: 1
     instructionMessage: Avvita
     targetObject: {fileID: 513599507}
     socketInteractor: {fileID: 0}
@@ -1461,7 +1462,16 @@ MonoBehaviour:
     grabInteractable: {fileID: 0}
     rotationBolt: 4
     directionBolt: 5
-  - operationType: 1
+  - operationType: 0
+    instructionMessage: attacca
+    targetObject: {fileID: 513599507}
+    socketInteractor: {fileID: 2111274127}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 0}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 5
+  - operationType: 2
     instructionMessage: Avvita
     targetObject: {fileID: 513599507}
     socketInteractor: {fileID: 0}
@@ -2193,7 +2203,7 @@ MonoBehaviour:
     rotationBolt: 4
     directionBolt: 4
   - operationType: 0
-    instructionMessage: Inserire il bullone, vedergli gli indicatori blu.
+    instructionMessage: Inserire il bullone, vedere gli indicatori blu.
     targetObject: {fileID: 1352133581}
     socketInteractor: {fileID: 1576830631}
     indicatorEnabled: 0
@@ -2211,14 +2221,239 @@ MonoBehaviour:
     rotationBolt: 4
     directionBolt: 4
   - operationType: 2
-    instructionMessage: Avvitare.
+    instructionMessage: Avvitare il bullone utilizzando il tool.
     targetObject: {fileID: 1352133581}
     socketInteractor: {fileID: 0}
     indicatorEnabled: 0
     indicatorPrefab: {fileID: 325148589}
     grabInteractable: {fileID: 0}
     rotationBolt: 5
-    directionBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Inserire la ruota che si trova sulla destra.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 633152818}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Inserire la ruota che si trova sulla destra.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 2047040402}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Inserire la ruota che si trova sulla destra.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 853837817}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 0
+    instructionMessage: Inserire il bullone, vedere gli indicatori blu.
+    targetObject: {fileID: 1544296005}
+    socketInteractor: {fileID: 54932122}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 633152818}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Inserire la ruota che si trova sulla destra.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 853837817}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 4
+    directionBolt: 4
+  - operationType: 2
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1544296005}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 853837817}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 2047040402}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1285309986}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1680194613}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 0
+    instructionMessage: Inserire il bullone, vedere gli indicatori blu.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 802408479}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1680194613}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1017029725}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1680194613}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 2
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1680194613}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1285309986}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1233703430}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 0
+    instructionMessage: Inserire il bullone, vedere gli indicatori blu.
+    targetObject: {fileID: 1268374966}
+    socketInteractor: {fileID: 1532104171}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 2
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1268374966}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1233703430}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 351919399}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 624725752}
+    socketInteractor: {fileID: 0}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 876682189}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 0
+    instructionMessage: Inserire il bullone, vedere gli indicatori blu.
+    targetObject: {fileID: 1077616980}
+    socketInteractor: {fileID: 1532104171}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1077616980}
+    socketInteractor: {fileID: 1532104171}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 876682189}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 2
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1077616980}
+    socketInteractor: {fileID: 1532104171}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 1306934259}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
+  - operationType: 8
+    instructionMessage: Avvitare il bullone utilizzando il tool.
+    targetObject: {fileID: 1077616980}
+    socketInteractor: {fileID: 1532104171}
+    indicatorEnabled: 0
+    indicatorPrefab: {fileID: 351919399}
+    grabInteractable: {fileID: 0}
+    rotationBolt: 5
+    directionBolt: 4
   instructionText: {fileID: 1067362846}
 --- !u!1 &876682189
 GameObject:
@@ -3813,6 +4048,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4117053965618860936, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6866935899790235709, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
         type: 3}
       propertyPath: m_Name
@@ -3821,6 +4061,11 @@ PrefabInstance:
     - target: {fileID: 6866935899790235709, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866935899790235709, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8841615765624182684, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
@@ -3859,7 +4104,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3477750562127403229, guid: e88b381eca1532b40a9ba9ec44e3cdcc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2568579920868748519, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
@@ -4937,7 +5183,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3477750562127403229, guid: e88b381eca1532b40a9ba9ec44e3cdcc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2568579920868748519, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
@@ -5637,7 +5884,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3477750562127403229, guid: e88b381eca1532b40a9ba9ec44e3cdcc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2568579920868748519, guid: e88b381eca1532b40a9ba9ec44e3cdcc,
@@ -6219,7 +6467,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8189781456130617083, guid: f036db49d802cc84fb58b4445b4b72ac, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3477750562127403229, guid: f036db49d802cc84fb58b4445b4b72ac, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2568579920868748519, guid: f036db49d802cc84fb58b4445b4b72ac,
