@@ -8,7 +8,7 @@ public class ScrewBoltOperation : BaseOperation
     public Asse rotationBolt;          // Axis of rotation
     public Asse directionBolt;         // Direction of lowering
     private float totalRotation = 0f;  // Accumulated rotation
-    private float requiredRotation = 300f; // Rotation needed to screw
+    private float requiredRotation = 550f; // Rotation needed to screw
     private float rotationSpeed = 200f;    // Rotation speed in degrees per second
     private float liftSpeed = 0.01f;       // Lowering speed per second
 
