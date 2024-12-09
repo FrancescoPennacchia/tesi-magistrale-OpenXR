@@ -9,6 +9,8 @@ TagManager:
   - OldTire
   - NewTire
   - Bolt
+  - Floor
+  - drill
   layers:
   - Default
   - TransparentFX
