@@ -26,22 +26,29 @@ public class FloorSoundCollide : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Controlla che questo oggetto abbia il tag "Bolt"
-        if (CompareTag("Bolt") || CompareTag("bolt") || CompareTag("drill") || CompareTag("chiave"))
-        {
-            // Controlla se l'oggetto colpito ha il tag "Floor"
-            if (collision.gameObject.CompareTag("Floor") && !hasLanded)
-            {
-                // Calcola la velocità relativa della collisione
-                float impactVelocity = collision.relativeVelocity.magnitude;
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
 
-                // Riproduce il suono se la velocità è sufficiente
-                if (impactVelocity >= minVelocity)
-                {
-                    PlayFallSound(impactVelocity);
-                    hasLanded = true;
-                }
+        if (collision.gameObject.CompareTag("Floor") && !hasLanded)
+        {
+            Debug.Log("Collided with Floor");
+
+            float impactVelocity = collision.relativeVelocity.magnitude;
+            Debug.Log("Impact Velocity: " + impactVelocity);
+
+            if (impactVelocity >= minVelocity)
+            {
+                Debug.Log("Playing sound...");
+                PlayFallSound(impactVelocity);
+                hasLanded = true;
             }
+        }
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            hasLanded = false;
         }
     }
 
