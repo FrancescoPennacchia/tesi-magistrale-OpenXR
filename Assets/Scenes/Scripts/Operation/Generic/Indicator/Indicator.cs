@@ -16,7 +16,7 @@ public class Indicator : MonoBehaviour
         {
             Vector3 arrowPosition = gameTarget.transform.position + new Vector3(0, verticalOffset, 0);
             currentArrow = Instantiate(arrowPrefab, arrowPosition, Quaternion.identity);
-            currentArrow.transform.rotation = Quaternion.Euler(0, 0, 90);
+            currentArrow.transform.rotation = Quaternion.Euler(0, 90, 90);
             currentArrow.transform.localScale = new Vector3(5f, 5f, 5f);
             currentArrow.transform.SetParent(gameTarget.transform);
             initialPosition = currentArrow.transform.localPosition;

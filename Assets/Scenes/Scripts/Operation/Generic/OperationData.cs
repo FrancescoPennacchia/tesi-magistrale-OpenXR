@@ -24,9 +24,17 @@ public class OperationData
     //[Header("Direction")]
     public Asse rotationBolt;
     public Asse directionBolt;
+
+    public AttachMode attachMode;
 };
 
 public enum Asse { XLeft, XRight, YUp, YDown, ZForward, ZBack, }
+
+public enum AttachMode
+{
+    RigidConnection,     
+    LooseConnection      
+}
 
 public enum OperationType
 {

@@ -2,11 +2,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+
 public class AttachObjectOperation : BaseOperation
 {
     public GameObject targetObject;
     public XRSocketInteractor socketInteractor;
 
+    public AttachMode attachMode;
+    private FixedJoint joint;
     private bool isCompleted = false;
 
     public override void StartOperation()
@@ -22,7 +25,6 @@ public class AttachObjectOperation : BaseOperation
             Debug.LogError("SocketInteractor non assegnato in AttachObjectOperation.");
             return;
         }
-
 
         if (!socketInteractor.isActiveAndEnabled)
         {
@@ -48,27 +50,20 @@ public class AttachObjectOperation : BaseOperation
         }
 
         BoxCollider boxCollider = socketInteractor.gameObject.GetComponent<BoxCollider>();
-        if(boxCollider != null)
+        if (boxCollider != null)
         {
             boxCollider.enabled = true;
         }
 
-   
-
         // Aggiungi listener all'evento selectEntered del socketInteractor
         socketInteractor.selectEntered.AddListener(OnObjectAttached);
         Debug.Log("Listener aggiunto al socketInteractor " + socketInteractor.name);
-
-        // Opzionale: Disabilita il XRGrabInteractable sul socketInteractor per impedire la rimozione
-        //socketInteractor.allowSelect = false;
     }
 
     public override bool IsOperationComplete()
     {
         return isCompleted;
     }
-
-
 
     private void OnObjectAttached(SelectEnterEventArgs args)
     {
@@ -78,16 +73,42 @@ public class AttachObjectOperation : BaseOperation
         // Verifica se l'oggetto inserito è quello target
         if (attachedObject == targetObject)
         {
-            
-            // Allinea la posizione e la rotazione dell'oggetto con quella del socket interactor
             Transform attachTransform = socketInteractor.attachTransform != null ? socketInteractor.attachTransform : socketInteractor.transform;
-      
-            targetObject.transform.SetParent(socketInteractor.transform, false);
-            targetObject.transform.localPosition = attachTransform.localPosition;
-            targetObject.transform.localRotation = attachTransform.localRotation;
-            targetObject.transform.localScale = attachTransform.localScale;
+            var rigidbody = targetObject.GetComponent<Rigidbody>();
 
+            if (attachMode == AttachMode.RigidConnection)
+            {
+                targetObject.transform.SetParent(socketInteractor.transform, false);
+                targetObject.transform.localPosition = attachTransform.localPosition;
+                targetObject.transform.localRotation = attachTransform.localRotation;
+                targetObject.transform.localScale = attachTransform.localScale;
+            } else
+            {
+                if (rigidbody != null)
+                {
+                    rigidbody.isKinematic = true;
+                    rigidbody.useGravity = false;
+                    rigidbody.velocity = Vector3.zero;
+                    rigidbody.angularVelocity = Vector3.zero;
+                }
+                
+                attachedObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
+                attachedObject.transform.SetParent(socketInteractor.transform, true);
 
+                // Aggiungi un punto di ancoraggio (come una cerniera o un vincolo) tra l'oggetto e il socket interactor
+                joint = attachedObject.AddComponent<FixedJoint>();
+                joint.connectedBody = socketInteractor.GetComponent<Rigidbody>();
+
+                // Aggiorna la posizione e la rotazione dell'oggetto relativamente al socket interactor a ogni frame
+                void UpdateTransform()
+                {
+                    attachedObject.transform.SetPositionAndRotation(
+                        attachTransform.position,
+                        attachTransform.rotation
+                    );
+                }
+                InvokeRepeating("UpdateTransform", 0f, Time.fixedDeltaTime);
+            }
 
             // Disabilita ulteriori interazioni
             var interactable = targetObject.GetComponent<XRGrabInteractable>();
@@ -98,58 +119,39 @@ public class AttachObjectOperation : BaseOperation
             }
 
             // Configura il Rigidbody dell'oggetto
-            var rigidbody = targetObject.GetComponent<Rigidbody>();
             if (rigidbody != null)
             {
-                rigidbody.isKinematic = true;
-                rigidbody.useGravity = false;
-                rigidbody.detectCollisions = false;
-                Debug.Log("Rigidbody configurato per " + targetObject.name);
+                if (attachMode == AttachMode.RigidConnection)
+                {
+                    rigidbody.isKinematic = true;
+                    rigidbody.useGravity = false;
+                    rigidbody.detectCollisions = true;
+                }        
+            }
+
+            /*
+            Collider collider = targetObject.GetComponent<Collider>();
+            if (collider != null)
+            {
+                // Se vuoi tenerlo come solido, non impostare isTrigger a true.
+                //collider.isTrigger = true; // opzionale se vuoi che non faccia collisioni fisiche
+                Debug.Log("Collider configurato per " + targetObject.name);
             }
             else
             {
-                Debug.LogWarning("Rigidbody non trovato su " + targetObject.name);
-            }
-
-
-            
-            Collider Collider = targetObject.GetComponent<Collider>();
-            if(Collider != null)
-            {
-                Collider.isTrigger = true;
-                Debug.Log("Collider impostato su IsTrigger per " + targetObject.name);
-            } else
-            {
                 Debug.LogWarning("Collider non trovato su " + targetObject.name);
-            }
+            }*/
 
-
-            
-            // Genitorizza l'oggetto al socket interactor
-            //targetObject.transform.SetParent(socketInteractor.transform, true);
-            //Debug.Log(targetObject.name + " genitorizzato al socketInteractor.");
             socketInteractor.enabled = false;
 
             // Rimuovi listener
             socketInteractor.selectEntered.RemoveListener(OnObjectAttached);
             Debug.Log("Listener rimosso dal socketInteractor " + socketInteractor.name);
 
-
-            // Disabilita il socket interactor
-            /*
-            socketInteractor.enabled = false;
-            socketInteractor.gameObject.SetActive(false);
-            BoxCollider box = socketInteractor.gameObject.GetComponent<BoxCollider>();
-            if (box != null)
-            {
-                box.enabled = false;
-               Debug.Log("Socket disabilitato correttamente.");
-            }
-           
-            */
+            // Non usiamo AttachWithJoint, nessun Joint viene creato
 
             isCompleted = true;
-            Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket.");
+            Debug.Log("Oggetto " + targetObject.name + " inserito correttamente nel socket senza Joint.");
         }
         else
         {

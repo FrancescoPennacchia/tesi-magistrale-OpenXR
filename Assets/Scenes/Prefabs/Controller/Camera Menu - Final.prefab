@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 8092783649291603341, guid: 2affe87489456464e9eca49431865b21,
         type: 3}
       propertyPath: m_Name
-      value: Camera Mani e Menu VR Variant Variant
+      value: Camera Menu - Final
       objectReference: {fileID: 0}
     - target: {fileID: 8520582146057936608, guid: 2affe87489456464e9eca49431865b21,
         type: 3}

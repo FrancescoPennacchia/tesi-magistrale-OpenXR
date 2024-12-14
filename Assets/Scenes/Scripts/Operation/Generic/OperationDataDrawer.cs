@@ -27,9 +27,10 @@ public class OperationDataDrawer : PropertyDrawer
         SerializedProperty grabInteractable = property.FindPropertyRelative("grabInteractable");
         SerializedProperty rotationBolt = property.FindPropertyRelative("rotationBolt");
         SerializedProperty directionBolt = property.FindPropertyRelative("directionBolt");
+        SerializedProperty attachMode = property.FindPropertyRelative("attachMode");
 
-    // Display each field
-    EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), operationType);
+        // Display each field
+        EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), operationType);
         position.y += EditorGUIUtility.singleLineHeight + 2;
 
         switch ((OperationType)operationType.enumValueIndex)
@@ -48,6 +49,9 @@ public class OperationDataDrawer : PropertyDrawer
                 position.y += EditorGUIUtility.singleLineHeight + 2;
 
                 EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), indicatorPrefab);
+                position.y += EditorGUIUtility.singleLineHeight + 2;
+
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), attachMode);
                 position.y += EditorGUIUtility.singleLineHeight + 2;
                 break;
 

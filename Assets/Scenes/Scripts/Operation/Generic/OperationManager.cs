@@ -49,6 +49,7 @@ public class OperationManager : MonoBehaviour
                 var attachOp = operationObject.AddComponent<AttachObjectOperation>();
                 attachOp.targetObject = data.targetObject;
                 attachOp.socketInteractor = data.socketInteractor;
+                attachOp.attachMode = data.attachMode;
                 operation = attachOp;
                 break;
 
