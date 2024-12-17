@@ -9,8 +9,10 @@ public class AttachObjectOperation : BaseOperation
     public XRSocketInteractor socketInteractor;
 
     public AttachMode attachMode;
+    public GameObject body;
     private FixedJoint joint;
     private bool isCompleted = false;
+
 
     public override void StartOperation()
     {
@@ -82,8 +84,10 @@ public class AttachObjectOperation : BaseOperation
                 targetObject.transform.localPosition = attachTransform.localPosition;
                 targetObject.transform.localRotation = attachTransform.localRotation;
                 targetObject.transform.localScale = attachTransform.localScale;
-            } else
+            }
+            else
             {
+
                 if (rigidbody != null)
                 {
                     rigidbody.isKinematic = true;
@@ -91,7 +95,7 @@ public class AttachObjectOperation : BaseOperation
                     rigidbody.velocity = Vector3.zero;
                     rigidbody.angularVelocity = Vector3.zero;
                 }
-                
+
                 attachedObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
                 attachedObject.transform.SetParent(socketInteractor.transform, true);
 
@@ -109,6 +113,7 @@ public class AttachObjectOperation : BaseOperation
                 }
                 InvokeRepeating("UpdateTransform", 0f, Time.fixedDeltaTime);
             }
+           
 
             // Disabilita ulteriori interazioni
             var interactable = targetObject.GetComponent<XRGrabInteractable>();
@@ -126,10 +131,10 @@ public class AttachObjectOperation : BaseOperation
                     rigidbody.isKinematic = true;
                     rigidbody.useGravity = false;
                     rigidbody.detectCollisions = true;
-                }        
+                }
             }
 
-            /*
+            
             Collider collider = targetObject.GetComponent<Collider>();
             if (collider != null)
             {
@@ -140,7 +145,7 @@ public class AttachObjectOperation : BaseOperation
             else
             {
                 Debug.LogWarning("Collider non trovato su " + targetObject.name);
-            }*/
+            }
 
             socketInteractor.enabled = false;
 

@@ -25,7 +25,9 @@ public class OperationData
     public Asse rotationBolt;
     public Asse directionBolt;
 
+
     public AttachMode attachMode;
+    public GameObject body;
 };
 
 public enum Asse { XLeft, XRight, YUp, YDown, ZForward, ZBack, }

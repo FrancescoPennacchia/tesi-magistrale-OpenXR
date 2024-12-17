@@ -50,6 +50,7 @@ public class OperationManager : MonoBehaviour
                 attachOp.targetObject = data.targetObject;
                 attachOp.socketInteractor = data.socketInteractor;
                 attachOp.attachMode = data.attachMode;
+                attachOp.body = data.body;
                 operation = attachOp;
                 break;
 

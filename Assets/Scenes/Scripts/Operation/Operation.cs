@@ -43,6 +43,7 @@ public class Operation : MonoBehaviour
                     grabInteractable.enabled = false;
                     grabInteractable.selectEntered.AddListener(OnObjectGrabbed);
                 }
+
             }
         }
     }
@@ -94,6 +95,7 @@ public class Operation : MonoBehaviour
                     {
                         interactor.isLocked = true;
                         AttachObject(interactor);
+                        
 
                         currentIndex++;
                         if (currentIndex < socketMessages.Count)
@@ -109,6 +111,14 @@ public class Operation : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void DisableSocketInteractor(XRSocketInteractor socketInteractor)
+    {
+        if (socketInteractor != null)
+        {
+            socketInteractor.enabled = false;
         }
     }
 
@@ -137,6 +147,12 @@ public class Operation : MonoBehaviour
                 if (grabInteractable != null)
                 {
                     grabInteractable.enabled = true;
+                }
+
+                var socketInteractor = socketMessages[currentIndex].socketInteractor;
+                if (socketInteractor != null)
+                {
+                    socketInteractor.enabled = true;
                 }
             }
         }
@@ -172,7 +188,9 @@ public class Operation : MonoBehaviour
             attachedObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
 
             // Se necessario, genitorizza l'oggetto al socket interactor
-            attachedObject.transform.SetParent(interactor.socketInteractor.transform, true);
+            //attachedObject.transform.SetParent(interactor.socketInteractor.transform, true);
+
+            //DisableSocketInteractor(interactor.socketInteractor);
         }
     }
 

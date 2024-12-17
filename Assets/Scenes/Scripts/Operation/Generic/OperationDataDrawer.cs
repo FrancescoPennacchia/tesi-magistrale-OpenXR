@@ -28,6 +28,7 @@ public class OperationDataDrawer : PropertyDrawer
         SerializedProperty rotationBolt = property.FindPropertyRelative("rotationBolt");
         SerializedProperty directionBolt = property.FindPropertyRelative("directionBolt");
         SerializedProperty attachMode = property.FindPropertyRelative("attachMode");
+        SerializedProperty body = property.FindPropertyRelative("body");
 
         // Display each field
         EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), operationType);
@@ -52,6 +53,9 @@ public class OperationDataDrawer : PropertyDrawer
                 position.y += EditorGUIUtility.singleLineHeight + 2;
 
                 EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), attachMode);
+                position.y += EditorGUIUtility.singleLineHeight + 2;
+
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), body);
                 position.y += EditorGUIUtility.singleLineHeight + 2;
                 break;
 

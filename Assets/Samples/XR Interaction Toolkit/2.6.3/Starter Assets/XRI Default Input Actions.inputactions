@@ -799,6 +799,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Activate Help",
+                    "type": "Button",
+                    "id": "5390dc0a-2ff8-40d0-b51e-b94cb9b9b0b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -997,6 +1006,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Activate Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c17269b-583a-4d45-99ba-75de04ba43a1",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Help",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1657,6 +1677,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Activate Help",
+                    "type": "Button",
+                    "id": "6712494b-5078-4508-9007-370c9548f020",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1844,6 +1873,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Activate Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15ee6e02-c67e-477c-abf1-c7c919202241",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Activate Help",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
