@@ -188,7 +188,7 @@ public class Operation : MonoBehaviour
             attachedObject.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
 
             // Se necessario, genitorizza l'oggetto al socket interactor
-            //attachedObject.transform.SetParent(interactor.socketInteractor.transform, true);
+            attachedObject.transform.SetParent(interactor.socketInteractor.transform, true);
 
             //DisableSocketInteractor(interactor.socketInteractor);
         }
