@@ -5033,12 +5033,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5504675062239350717, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -353
+      objectReference: {fileID: 0}
     - target: {fileID: 6606455086674212557, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75,
         type: 3}
+    - target: {fileID: 7667237760142655981, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_text
+      value: Seguire le istruzioni per assemblare il robot
+      objectReference: {fileID: 0}
     - target: {fileID: 7667237760142655981, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
       propertyPath: m_fontAsset
