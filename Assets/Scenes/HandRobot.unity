@@ -2029,7 +2029,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2439,7 +2439,7 @@ PrefabInstance:
     - target: {fileID: 7403072356416083930, guid: ed5fdb8d3e523e94ca6d8a239d40615a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.35
+      value: 0.443
       objectReference: {fileID: 0}
     - target: {fileID: 7403072356416083930, guid: ed5fdb8d3e523e94ca6d8a239d40615a,
         type: 3}
@@ -2475,6 +2475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7403072356416083935, guid: ed5fdb8d3e523e94ca6d8a239d40615a,
+        type: 3}
+      propertyPath: m_MovementType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7403072357328242341, guid: ed5fdb8d3e523e94ca6d8a239d40615a,
         type: 3}
@@ -2584,6 +2589,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2061242080761848669, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2606966168262580018, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174650526057161699, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568821664184496168, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3879806283225916409, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2649,6 +2674,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4647819883453214314, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4752130277617876762, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2683,6 +2713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -352
+      objectReference: {fileID: 0}
+    - target: {fileID: 7556828699828034002, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7667237760142655981, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
