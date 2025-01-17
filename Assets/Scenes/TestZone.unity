@@ -6969,6 +6969,31 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1931091526250788784, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
+    - target: {fileID: 2893153653772725017, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
+    - target: {fileID: 3742385095804638899, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
+    - target: {fileID: 3822366891464453829, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
+    - target: {fileID: 4511936450549709274, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
     - target: {fileID: 4905638595027300067, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7029,6 +7054,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jeep Renegade
       objectReference: {fileID: 0}
+    - target: {fileID: 6307045052615878390, guid: 6d82a0eeba86f314b9601eeecf3aefa8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9451af8160b72e8468f4eccf28e88d2f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5258210462557157092, guid: 6d82a0eeba86f314b9601eeecf3aefa8, type: 3}
