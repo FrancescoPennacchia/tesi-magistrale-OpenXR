@@ -21,8 +21,17 @@ public class UnscrewBoltOperation : BaseOperation
     private Vector3 initialBoltPosition;
     private Quaternion initialBoltRotation;
 
+    //Input Drill
+    private XRInputActions inputActions;
+    float rightTriggerValue;
+    float leftTriggerValue;
+
     public override void StartOperation()
     {
+
+        inputActions = new XRInputActions();
+        inputActions.XRController.Enable();
+
         if (bolt == null)
         {
             Debug.LogError("Bolt not assigned in UnscrewBoltOperation.");
@@ -91,6 +100,13 @@ public class UnscrewBoltOperation : BaseOperation
         {
             shouldRotateAndLift = true;
             Debug.Log("Key entered bolt collider.");
+        } else if (other.CompareTag("drill"))
+        {
+            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
+            {
+                shouldRotateAndLift = true;
+                Debug.Log("Key entered drill collider.");
+            }
         }
     }
 
@@ -101,11 +117,21 @@ public class UnscrewBoltOperation : BaseOperation
         {
             shouldRotateAndLift = false;
             Debug.Log("Key exited bolt collider.");
+        } else if (other.CompareTag("drill"))
+        {
+            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
+            {
+                shouldRotateAndLift = false;
+                Debug.Log("Key entered drill collider.");
+            }
         }
     }
 
     private void Update()
     {
+        rightTriggerValue = inputActions.XRController.RightTrigger.ReadValue<float>();
+        leftTriggerValue = inputActions.XRController.LeftTrigger.ReadValue<float>();
+
         if (shouldRotateAndLift && totalRotation < requiredRotation)
         {
             float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
@@ -158,6 +184,8 @@ public class UnscrewBoltOperation : BaseOperation
             grabInteractable = bolt.AddComponent<XRGrabInteractable>();
         }
         grabInteractable.enabled = true;
+
+        inputActions.XRController.Disable();
 
         Debug.Log("Bolt unscrewed successfully!");
     }
