@@ -3152,7 +3152,7 @@ PrefabInstance:
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.685
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
@@ -3162,27 +3162,27 @@ PrefabInstance:
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.848
+      value: -0.131
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.025224473
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.99968183
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
@@ -3192,7 +3192,7 @@ PrefabInstance:
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 117418198389691255, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
@@ -3236,6 +3236,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3958054347598112463, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4836879490761584906, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_text
@@ -3257,6 +3262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5883158552778221181, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
+        type: 3}
+      propertyPath: m_text
+      value: GARAGE
       objectReference: {fileID: 0}
     - target: {fileID: 5883158552778221181, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
@@ -3305,7 +3315,7 @@ PrefabInstance:
     - target: {fileID: 8944870729584361258, guid: d31eded60f47f9745aa2f7fc97bfb3a4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: HandRobot
+      value: Garage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
