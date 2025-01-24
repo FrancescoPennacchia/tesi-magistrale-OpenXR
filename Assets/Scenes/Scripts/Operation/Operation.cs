@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
 using System;
+using System.IO;
 
 public class Operation : MonoBehaviour
 {
@@ -19,8 +20,22 @@ public class Operation : MonoBehaviour
     private int currentIndex = 0;
 
 
+    [SerializeField] private string operationName = "robot";
+
+    //Timer operazioni
+    private float totalOperationTimer = 0f;
+    private List<float> stepsTimer;
+    private bool startTimer = false;
+    private string filePath;
+
+
     public void NewStart()
     {
+        startTimer = true;
+        stepsTimer = new List<float>(new float[socketMessages.Count]);
+        filePath = Application.persistentDataPath + "/" + operationName + "/timerData.txt";
+        stepsTimer[currentIndex] = 0f;
+
         UpdateMessage();
         AddArrow(currentIndex);
         EnableCurrentGrabInteractable();
@@ -30,6 +45,7 @@ public class Operation : MonoBehaviour
     {
         foreach (var interactor in socketMessages)
         {
+
             interactor.socketInteractor.selectEntered.AddListener(OnAttach);
             interactor.socketInteractor.selectExited.AddListener(OnDetach);
 
@@ -100,12 +116,29 @@ public class Operation : MonoBehaviour
                         currentIndex++;
                         if (currentIndex < socketMessages.Count)
                         {
+                            stepsTimer[currentIndex] = 0f;
                             UpdateMessage();
                             AddArrow(currentIndex);
                             EnableCurrentGrabInteractable();
                         }
                         else
                         {
+                            filePath = Application.persistentDataPath + "/" + operationName + "/timerData.txt";
+
+                            startTimer = false;
+
+                            // Ensure file exists
+                            if (!File.Exists(filePath))
+                            {
+                                Debug.Log("File non trovato, lo creo...");
+                                CreateFile();
+                            }
+
+                            // Prepare data to save
+                            string saveData = PrepareTimerDataForSaving();
+                            SaveData(saveData);
+
+
                             canvasText.text = "Hai completato le istruzioni da eseguire!";
                         }
                     }
@@ -224,8 +257,57 @@ public class Operation : MonoBehaviour
         }
     }
 
+    private string PrepareTimerDataForSaving()
+    {
+        // Create a formatted string with total and individual operation times
+        string timersData = "Tempo totale: " + totalOperationTimer.ToString("F2") + " secondi\n";
+
+        for (int i = 0; i < stepsTimer.Count; i++)
+        {
+            timersData += $"Operazione {i}: {stepsTimer[i].ToString("F2")} secondi\n";
+        }
+
+        return timersData;
+    }
+
+    private void CreateFile()
+    {
+        string directory = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+            Debug.Log("Directory creata: " + directory);
+        }
+
+        File.WriteAllText(filePath, string.Empty); // Crea un file vuoto
+        Debug.Log("File creato con successo.");
+    }
+
+
+    private void SaveData(string data)
+    {
+        string timestampedData = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {data}\n";
+        File.AppendAllText(filePath, timestampedData);
+    }
+
+    public void StartTimer()
+    {
+        startTimer = true;
+    }
+
+    public void StopTimer()
+    {
+        startTimer = false;
+    }
+
     private void Update()
     {
+        if (startTimer && currentIndex < socketMessages.Count)
+        {
+            totalOperationTimer += Time.deltaTime;
+            stepsTimer[currentIndex] += Time.deltaTime;
+        }
+
         if (currentArrow != null)
         {
             // Calcola lo spostamento laterale utilizzando una funzione sinusoidale
