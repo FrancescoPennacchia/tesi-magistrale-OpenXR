@@ -26,6 +26,8 @@ public class UnscrewBoltOperation : BaseOperation
     float rightTriggerValue;
     float leftTriggerValue;
 
+    bool isDrill = false;
+
     public override void StartOperation()
     {
 
@@ -98,15 +100,14 @@ public class UnscrewBoltOperation : BaseOperation
         // Check if the entering object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
+            isDrill = false;
             shouldRotateAndLift = true;
             Debug.Log("Key entered bolt collider.");
         } else if (other.CompareTag("drill"))
         {
-            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
-            {
-                shouldRotateAndLift = true;
-                Debug.Log("Key entered drill collider.");
-            }
+            isDrill = true;
+            shouldRotateAndLift = true;
+            Debug.Log("Key entered drill collider.");     
         }
     }
 
@@ -115,15 +116,14 @@ public class UnscrewBoltOperation : BaseOperation
         // Check if the exiting object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
+            isDrill = false;
             shouldRotateAndLift = false;
             Debug.Log("Key exited bolt collider.");
         } else if (other.CompareTag("drill"))
         {
-            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
-            {
-                shouldRotateAndLift = false;
-                Debug.Log("Key entered drill collider.");
-            }
+            isDrill = false;
+            shouldRotateAndLift = false;
+            Debug.Log("Key entered drill collider.");      
         }
     }
 
@@ -132,7 +132,24 @@ public class UnscrewBoltOperation : BaseOperation
         rightTriggerValue = inputActions.XRController.RightTrigger.ReadValue<float>();
         leftTriggerValue = inputActions.XRController.LeftTrigger.ReadValue<float>();
 
-        if (shouldRotateAndLift && totalRotation < requiredRotation)
+        bool isTriggerPressed = rightTriggerValue > 0.5f || leftTriggerValue > 0.5f;
+
+        if (isDrill && isTriggerPressed && shouldRotateAndLift && totalRotation < requiredRotation)
+        {
+            float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
+            float liftStep = liftSpeed * Time.deltaTime;         // Lifting per frame
+
+            bolt.transform.Rotate(rotationAxis, rotationStep, Space.Self); // Rotate bolt
+            bolt.transform.Translate(liftDirection * liftStep, Space.Self); // Lift bolt
+            totalRotation += rotationStep;
+
+            // Check if required rotation is achieved
+            if (totalRotation >= requiredRotation)
+            {
+                isUnscrewed = true;
+                OnOperationComplete();
+            }
+        } else if (!isDrill && shouldRotateAndLift && totalRotation < requiredRotation)
         {
             float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
             float liftStep = liftSpeed * Time.deltaTime;         // Lifting per frame

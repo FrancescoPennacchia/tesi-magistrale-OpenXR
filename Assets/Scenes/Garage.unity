@@ -4728,6 +4728,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75,
         type: 3}
+    - target: {fileID: 1727156224336708634, guid: 6936dce29f391cc4d89b7cc5568f665b,
+        type: 3}
+      propertyPath: operationName
+      value: ruota
+      objectReference: {fileID: 0}
     - target: {fileID: 2700280983584334643, guid: 6936dce29f391cc4d89b7cc5568f665b,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -4776,6 +4781,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478811131440979987, guid: 6936dce29f391cc4d89b7cc5568f665b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 194816090326706911}
+    - target: {fileID: 8478811131440979987, guid: 6936dce29f391cc4d89b7cc5568f665b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: StartTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478811131440979987, guid: 6936dce29f391cc4d89b7cc5568f665b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: OperationManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8664464130414436934, guid: 6936dce29f391cc4d89b7cc5568f665b,
         type: 3}
@@ -4842,6 +4862,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 194816090326706909}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &194816090326706911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1727156224336708634, guid: 6936dce29f391cc4d89b7cc5568f665b,
+    type: 3}
+  m_PrefabInstance: {fileID: 194816090326706909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5127a7039e6cfe40974457d5ad16345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2124977397324094176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5066,6 +5098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: change_candela
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566174348960541102, guid: c61415b908f14594bab808835aa1ac7d,
+        type: 3}
+      propertyPath: operationName
+      value: candela
       objectReference: {fileID: 0}
     - target: {fileID: 6720068901031074102, guid: c61415b908f14594bab808835aa1ac7d,
         type: 3}

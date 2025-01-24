@@ -26,6 +26,8 @@ public class ScrewBoltOperation : BaseOperation
     float rightTriggerValue;
     float leftTriggerValue;
 
+    bool isDrill = false;
+
 
     public override void StartOperation()
     {
@@ -96,37 +98,35 @@ public class ScrewBoltOperation : BaseOperation
     public void HandleTriggerEnter(Collider other)
     {
         Debug.Log("Object entered bolt trigger: " + other.gameObject.name);
-
-        // Check if the entering object is the key
+        // Check if the entering object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
+            isDrill = false;
             shouldRotateAndLift = true;
             Debug.Log("Key entered bolt collider.");
         }
         else if (other.CompareTag("drill"))
         {
-            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
-            {
-                shouldRotateAndLift = true;
-                Debug.Log("Key entered drill collider.");
-            }
+            isDrill = true;
+            shouldRotateAndLift = true;
+            Debug.Log("Key entered drill collider.");
         }
     }
 
     public void HandleTriggerExit(Collider other)
     {
-        // Check if the exiting object is the key
+        // Check if the exiting object has the tag "chiave"
         if (other.CompareTag("chiave"))
         {
+            isDrill = false;
             shouldRotateAndLift = false;
             Debug.Log("Key exited bolt collider.");
-        } else if (other.CompareTag("drill"))
+        }
+        else if (other.CompareTag("drill"))
         {
-            if (rightTriggerValue > 0.5f || leftTriggerValue > 0.5f)
-            {
-                shouldRotateAndLift = false;
-                Debug.Log("Key entered drill collider.");
-            }
+            isDrill = false;
+            shouldRotateAndLift = false;
+            Debug.Log("Key entered drill collider.");
         }
     }
 
@@ -135,7 +135,45 @@ public class ScrewBoltOperation : BaseOperation
         rightTriggerValue = inputActions.XRController.RightTrigger.ReadValue<float>();
         leftTriggerValue = inputActions.XRController.LeftTrigger.ReadValue<float>();
 
+        /*
         if (shouldRotateAndLift && totalRotation < requiredRotation)
+        {
+            float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
+            float liftStep = liftSpeed * Time.deltaTime;         // Lowering per frame
+
+            // Rotate and lower the bolt
+            bolt.transform.Rotate(rotationAxis, -rotationStep, Space.Self); // Inverse rotation
+            bolt.transform.Translate(-liftDirection * liftStep, Space.Self); // Inverse lifting
+            totalRotation += rotationStep;
+
+            // Check if required rotation is achieved
+            if (totalRotation >= requiredRotation)
+            {
+                isScrewed = true;
+                OnOperationComplete();
+            }
+        } */
+
+        bool isTriggerPressed = rightTriggerValue > 0.5f || leftTriggerValue > 0.5f;
+
+        if (isDrill && isTriggerPressed && shouldRotateAndLift && totalRotation < requiredRotation)
+        {
+            float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
+            float liftStep = liftSpeed * Time.deltaTime;         // Lowering per frame
+
+            // Rotate and lower the bolt
+            bolt.transform.Rotate(rotationAxis, -rotationStep, Space.Self); // Inverse rotation
+            bolt.transform.Translate(-liftDirection * liftStep, Space.Self); // Inverse lifting
+            totalRotation += rotationStep;
+
+            // Check if required rotation is achieved
+            if (totalRotation >= requiredRotation)
+            {
+                isScrewed = true;
+                OnOperationComplete();
+            }
+        }
+        else if (!isDrill && shouldRotateAndLift && totalRotation < requiredRotation)
         {
             float rotationStep = rotationSpeed * Time.deltaTime; // Rotation per frame
             float liftStep = liftSpeed * Time.deltaTime;         // Lowering per frame

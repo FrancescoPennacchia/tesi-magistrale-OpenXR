@@ -35,6 +35,8 @@ public class OperationManagerEditor : Editor
         reorderableList.DoLayoutList();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("instructionText"));
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("operationName"));
+
         serializedObject.ApplyModifiedProperties();
     }
 }
