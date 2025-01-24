@@ -182,31 +182,11 @@ public class OperationManager : MonoBehaviour
         Debug.Log("File creato con successo.");
     }
 
-    /*
+
     private void SaveData(string data)
     {
         string timestampedData = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {data}\n";
         File.AppendAllText(filePath, timestampedData);
-    }*/
-
-    private void SaveData(string data)
-    {
-        var saveData = new
-        {
-            timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-            totalOperationTime = totalOperationTimer,
-            stepsTimer = stepsTimer
-        };
-
-        string jsonData = JsonUtility.ToJson(saveData, true);
-
-        // Aggiungi un separatore opzionale (ad esempio, per distinguere i salvataggi)
-        string separator = "\n---\n";
-
-        // Aggiungi il JSON al file esistente
-        File.AppendAllText(filePath, jsonData + separator);
-
-        Debug.Log("Nuovi dati aggiunti al file in formato JSON.");
     }
 
     public void StartTimer()
