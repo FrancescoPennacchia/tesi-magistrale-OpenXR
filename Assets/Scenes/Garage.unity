@@ -4745,6 +4745,11 @@ PrefabInstance:
       propertyPath: operationName
       value: ruota
       objectReference: {fileID: 0}
+    - target: {fileID: 1727156224336708634, guid: 6936dce29f391cc4d89b7cc5568f665b,
+        type: 3}
+      propertyPath: operationsData.Array.data[1].instructionMessage
+      value: Rimuovere il bullone utilizzando lo svita bulloni (Richiede attivazione).
+      objectReference: {fileID: 0}
     - target: {fileID: 2700280983584334643, guid: 6936dce29f391cc4d89b7cc5568f665b,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -5190,6 +5195,16 @@ PrefabInstance:
         type: 3}
       propertyPath: operationName
       value: robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 115961145858369498, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: socketMessages.Array.data[2].message
+      value: Collegare il braccio destro al corpo
+      objectReference: {fileID: 0}
+    - target: {fileID: 115961145858369498, guid: eee67fceefdd83848b7f9f084d6e6d20,
+        type: 3}
+      propertyPath: socketMessages.Array.data[3].message
+      value: Collegare il braccio destro al sinistro
       objectReference: {fileID: 0}
     - target: {fileID: 1264909549010167122, guid: eee67fceefdd83848b7f9f084d6e6d20,
         type: 3}
