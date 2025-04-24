@@ -1,9 +1,10 @@
 # Un ambiente per la simulazione virtuale di procedure basate su sequenze di operazioni manuali
-# Nome app: NextStep Maintenance
 
 **Tesi Magistrale in Game design and development – Università degli Studi del Molise**
+**Nome app:** NextStep Maintenance
 **Ambito:** Realtà Virtuale (VR) e Realtà Aumentata (AR)  
 **Tecnologie:** Unity3D, OpenXR, XR Interaction Toolkit
+
 
 ## Descrizione del progetto
 
