@@ -1,4 +1,4 @@
-# Un ambiente per la simulazione virtuale di procedure basate su seqenze di operazioni manuali
+# Un ambiente per la simulazione virtuale di procedure basate su sequenze di operazioni manuali
 
 **Tesi Magistrale in Game design and development – Università degli Studi del Molise**
 **Ambito:** Realtà Virtuale (VR) e Realtà Aumentata (AR)  
